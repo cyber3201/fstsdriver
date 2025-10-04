@@ -6,7 +6,6 @@
   <title>FSTS Driver – Module Vitrine</title>
   <style>
     :root {
-      color-scheme: light dark;
       --primary: #1f2a44;
       --accent: #f0a500;
       --accent-soft: rgba(240, 165, 0, 0.12);
@@ -88,10 +87,10 @@
     nav.nav-wrapper {
       display: flex;
       gap: 0.5rem;
-      flex-wrap: wrap;
       flex: 1 1 auto;
       justify-content: flex-end;
       align-items: center;
+      flex-wrap: wrap;
     }
 
     .nav-list {
@@ -203,74 +202,8 @@
       transform: translate(-50%, -50%) rotate(-45deg);
     }
 
-    .nav-backdrop {
-      position: fixed;
-      inset: 0;
-      background: rgba(15, 23, 42, 0.35);
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.2s ease;
-      z-index: 110;
-    }
-
-    .nav-backdrop.active {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .mobile-nav-header {
-      display: none;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 1.5rem;
-      gap: 1rem;
-    }
-
-    .mobile-nav-header img {
-      width: 54px;
-      height: auto;
-    }
-
-    .nav-close {
-      width: 38px;
-      height: 38px;
-      border-radius: 0.75rem;
-      border: 1px solid var(--border);
-      background: #ffffff;
-      color: var(--primary);
-      position: relative;
-      cursor: pointer;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      transition: background 0.2s ease, border-color 0.2s ease;
-    }
-
-    .nav-close::before,
-    .nav-close::after {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 16px;
-      height: 2px;
-      background: currentColor;
-      transform-origin: center;
-    }
-
-    .nav-close::before {
-      transform: translate(-50%, -50%) rotate(45deg);
-    }
-
-    .nav-close::after {
-      transform: translate(-50%, -50%) rotate(-45deg);
-    }
-
-    .nav-close:hover,
-    .nav-close:focus {
-      background: var(--accent-soft);
-      border-color: rgba(31, 42, 68, 0.28);
-      outline: none;
+    .nav-wrapper.open {
+      display: flex;
     }
 
     main {
@@ -458,50 +391,39 @@
         padding: 1rem 1.25rem;
       }
 
+      .brand {
+        flex: 1;
+      }
+
       .nav-toggle {
         display: inline-flex;
       }
 
       nav.nav-wrapper {
-        position: fixed;
-        top: 1.25rem;
+        position: absolute;
+        top: calc(100% + 0.75rem);
         left: 1.25rem;
         right: 1.25rem;
         background: #ffffff;
-        flex: none;
+        border: 1px solid rgba(39, 64, 96, 0.12);
+        border-radius: 1rem;
+        padding: 0.75rem;
+        box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
         flex-direction: column;
-        justify-content: flex-start;
         align-items: stretch;
-        padding: 1.5rem 1.25rem;
-        box-shadow: 0 22px 48px rgba(15, 23, 42, 0.16);
-        border-radius: 1.25rem;
-        transform: translateY(-1.5rem);
-        opacity: 0;
-        visibility: hidden;
-        transition: opacity 0.2s ease, transform 0.2s ease;
+        gap: 0.65rem;
+        display: none;
         z-index: 120;
-        max-height: calc(100vh - 2.5rem);
-        overflow-y: auto;
       }
 
       nav.nav-wrapper.open {
-        transform: translateY(0);
-        opacity: 1;
-        visibility: visible;
-      }
-
-      .mobile-nav-header {
         display: flex;
-      }
-
-      .nav-close {
-        display: inline-flex;
       }
 
       .nav-list {
         flex-direction: column;
         align-items: stretch;
-        gap: 0.75rem;
+        gap: 0.65rem;
       }
 
       .nav-list button {
@@ -510,7 +432,7 @@
         font-size: 1.05rem;
         padding: 0.85rem 1rem;
         box-shadow: none;
-        border-radius: 1rem;
+        border-radius: 0.95rem;
       }
 
       .nav-list button:hover,
@@ -569,10 +491,6 @@
       <span class="sr-only">Ouvrir le menu</span>
     </button>
     <nav aria-label="Navigation principale" class="nav-wrapper" id="primary-nav">
-      <div class="mobile-nav-header">
-        <img src="logo-fsts-drive.svg" alt="FSTS Driver" />
-        <button type="button" class="nav-close" id="nav-close" aria-label="Fermer le menu"></button>
-      </div>
       <div class="nav-list">
         <button type="button" class="nav-btn active" data-target="home" aria-pressed="true">Accueil</button>
         <button type="button" class="nav-btn" data-target="tronc-commun">Tronc commun</button>
@@ -582,7 +500,6 @@
       </div>
     </nav>
   </header>
-  <div class="nav-backdrop" id="nav-backdrop" hidden aria-hidden="true"></div>
 
   <main>
     <section id="home" class="info-section">
@@ -850,8 +767,7 @@
     const navButtons = document.querySelectorAll('.nav-btn');
     const navWrapper = document.getElementById('primary-nav');
     const navToggle = document.getElementById('nav-toggle');
-    const navClose = document.getElementById('nav-close');
-    const navBackdrop = document.getElementById('nav-backdrop');
+    const navToggleLabel = navToggle ? navToggle.querySelector('.sr-only') : null;
     const homeSection = document.getElementById('home');
     const groupPanel = document.getElementById('group-panel');
     const groupView = document.getElementById('group-view');
@@ -867,11 +783,9 @@
       navWrapper.classList.add('open');
       navToggle.classList.add('open');
       navToggle.setAttribute('aria-expanded', 'true');
-      if (navBackdrop) {
-        navBackdrop.classList.add('active');
-        navBackdrop.hidden = false;
+      if (navToggleLabel) {
+        navToggleLabel.textContent = 'Fermer le menu';
       }
-      document.body.style.overflow = 'hidden';
     }
 
     function closeMobileNav(shouldFocusToggle = false) {
@@ -879,11 +793,9 @@
       navWrapper.classList.remove('open');
       navToggle.classList.remove('open');
       navToggle.setAttribute('aria-expanded', 'false');
-      if (navBackdrop) {
-        navBackdrop.classList.remove('active');
-        navBackdrop.hidden = true;
+      if (navToggleLabel) {
+        navToggleLabel.textContent = 'Ouvrir le menu';
       }
-      document.body.style.removeProperty('overflow');
       if (shouldFocusToggle) {
         navToggle.focus();
       }
@@ -972,14 +884,6 @@
           openMobileNav();
         }
       });
-    }
-
-    if (navClose) {
-      navClose.addEventListener('click', () => closeMobileNav(true));
-    }
-
-    if (navBackdrop) {
-      navBackdrop.addEventListener('click', () => closeMobileNav(true));
     }
 
     window.addEventListener('resize', () => {
