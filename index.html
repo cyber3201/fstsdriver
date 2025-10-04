@@ -764,7 +764,7 @@
   </footer>
 
   <script>
-    const navButtons = document.querySelectorAll('.nav-btn');
+    const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
     const navWrapper = document.getElementById('primary-nav');
     const navToggle = document.getElementById('nav-toggle');
     const navToggleLabel = navToggle ? navToggle.querySelector('.sr-only') : null;
@@ -772,11 +772,25 @@
     const groupPanel = document.getElementById('group-panel');
     const groupView = document.getElementById('group-view');
     const filiereView = document.getElementById('filiere-view');
+    const filiereTiles = Array.from(filiereView.querySelectorAll('.tile'));
     const modulesView = document.getElementById('modules-view');
+    const moduleSets = Array.from(modulesView.querySelectorAll('.modules-set'));
+    const breadcrumb = document.getElementById('breadcrumb');
     const breadcrumbHome = document.getElementById('breadcrumb-home');
     const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
     const breadcrumbGroupBtn = document.getElementById('breadcrumb-group');
     const breadcrumbFiliere = document.getElementById('breadcrumb-filiere');
+
+    const navLabels = Object.fromEntries(
+      navButtons.map((btn) => [btn.dataset.target, btn.textContent.trim()])
+    );
+
+    const state = {
+      nav: 'home',
+      group: null,
+      filiere: null,
+      filiereLabel: '',
+    };
 
     function openMobileNav() {
       if (!navWrapper || !navToggle) return;
@@ -813,50 +827,58 @@
       });
     }
 
-    function showHome() {
-      setActiveNav('home');
-      homeSection.classList.remove('hidden');
-      groupPanel.classList.add('hidden');
-      groupView.classList.remove('hidden');
-      filiereView.classList.add('hidden');
-      modulesView.classList.add('hidden');
-      modulesView.querySelectorAll('.modules-set').forEach((set) => set.classList.add('hidden'));
-      breadcrumbGroupBtn.textContent = '';
-      breadcrumbGroupBtn.classList.add('hidden');
-      breadcrumbSeparator.classList.add('hidden');
-      breadcrumbFiliere.classList.add('hidden');
-      breadcrumbFiliere.textContent = '';
+    function focusPanel() {
+      if (!groupPanel) return;
+      groupPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
-    function showGroup(groupKey) {
-      setActiveNav(groupKey);
+    function render() {
+      setActiveNav(state.nav);
+
+      if (state.nav === 'home') {
+        homeSection.classList.remove('hidden');
+        groupPanel.classList.remove('hidden');
+        groupView.classList.remove('hidden');
+        filiereView.classList.add('hidden');
+        modulesView.classList.add('hidden');
+        breadcrumb.classList.add('hidden');
+        breadcrumbGroupBtn.classList.add('hidden');
+        breadcrumbSeparator.classList.add('hidden');
+        breadcrumbFiliere.classList.add('hidden');
+        breadcrumbFiliere.textContent = '';
+        filiereTiles.forEach((tile) => tile.classList.remove('hidden'));
+        moduleSets.forEach((set) => set.classList.add('hidden'));
+        return;
+      }
+
       homeSection.classList.add('hidden');
       groupPanel.classList.remove('hidden');
-      groupView.classList.add('hidden');
-      filiereView.classList.remove('hidden');
-      modulesView.classList.add('hidden');
-      modulesView.querySelectorAll('.modules-set').forEach((set) => set.classList.add('hidden'));
-      breadcrumbGroupBtn.textContent = document.querySelector(`.nav-btn[data-target="${groupKey}"]`).textContent;
+      breadcrumb.classList.remove('hidden');
+      breadcrumbGroupBtn.textContent = navLabels[state.group] || '';
       breadcrumbGroupBtn.classList.remove('hidden');
       breadcrumbSeparator.classList.remove('hidden');
-      breadcrumbFiliere.classList.add('hidden');
-      breadcrumbFiliere.textContent = '';
 
-      filiereView.querySelectorAll('.tile').forEach((tile) => {
-        tile.classList.toggle('hidden', tile.dataset.group !== groupKey);
-      });
-    }
+      if (!state.filiere) {
+        groupView.classList.add('hidden');
+        filiereView.classList.remove('hidden');
+        modulesView.classList.add('hidden');
+        breadcrumbFiliere.classList.add('hidden');
+        breadcrumbFiliere.textContent = '';
+        filiereTiles.forEach((tile) => {
+          tile.classList.toggle('hidden', tile.dataset.group !== state.group);
+        });
+        moduleSets.forEach((set) => set.classList.add('hidden'));
+        return;
+      }
 
-    function showModules(groupKey, filiereKey, filiereLabel) {
-      modulesView.classList.remove('hidden');
       groupView.classList.add('hidden');
       filiereView.classList.add('hidden');
-      breadcrumbFiliere.textContent = `› ${filiereLabel}`;
+      modulesView.classList.remove('hidden');
       breadcrumbFiliere.classList.remove('hidden');
-
-      modulesView.querySelectorAll('.modules-set').forEach((set) => {
-        const match = set.dataset.group === groupKey && set.dataset.filiere === filiereKey;
-        set.classList.toggle('hidden', !match);
+      breadcrumbFiliere.textContent = `› ${state.filiereLabel}`;
+      moduleSets.forEach((set) => {
+        const isMatch = set.dataset.group === state.group && set.dataset.filiere === state.filiere;
+        set.classList.toggle('hidden', !isMatch);
       });
     }
 
@@ -864,10 +886,19 @@
       button.addEventListener('click', () => {
         const target = button.dataset.target;
         if (target === 'home') {
-          showHome();
-          groupView.classList.remove('hidden');
+          state.nav = 'home';
+          state.group = null;
+          state.filiere = null;
+          state.filiereLabel = '';
         } else {
-          showGroup(target);
+          state.nav = target;
+          state.group = target;
+          state.filiere = null;
+          state.filiereLabel = '';
+        }
+        render();
+        if (state.nav !== 'home') {
+          focusPanel();
         }
         if (isMobileView()) {
           closeMobileNav();
@@ -902,40 +933,54 @@
       const tile = event.target.closest('.tile');
       if (!tile) return;
       const groupKey = tile.dataset.group;
-      if (groupKey) {
-        showGroup(groupKey);
-      }
+      if (!groupKey) return;
+      state.nav = groupKey;
+      state.group = groupKey;
+      state.filiere = null;
+      state.filiereLabel = '';
+      render();
+      focusPanel();
     });
 
     filiereView.addEventListener('click', (event) => {
       const tile = event.target.closest('.tile');
       if (!tile) return;
       const { group: groupKey, filiere: filiereKey } = tile.dataset;
-      if (groupKey && filiereKey) {
-        const label = tile.querySelector('h3').textContent;
-        showModules(groupKey, filiereKey, label);
-      }
+      if (!groupKey || !filiereKey) return;
+      const label = tile.querySelector('h3')?.textContent?.trim() || '';
+      state.nav = groupKey;
+      state.group = groupKey;
+      state.filiere = filiereKey;
+      state.filiereLabel = label;
+      render();
+      focusPanel();
     });
 
     breadcrumbHome.addEventListener('click', () => {
-      showHome();
-      groupView.classList.remove('hidden');
+      state.nav = 'home';
+      state.group = null;
+      state.filiere = null;
+      state.filiereLabel = '';
+      render();
+      if (isMobileView()) {
+        closeMobileNav();
+      }
     });
 
     breadcrumbGroupBtn.addEventListener('click', () => {
-      const activeGroup = [...navButtons].find((btn) => btn.classList.contains('active'));
-      if (!activeGroup || activeGroup.dataset.target === 'home') {
-        showHome();
-        groupView.classList.remove('hidden');
-        return;
+      if (!state.group) {
+        state.nav = 'home';
+      } else {
+        state.nav = state.group;
       }
-      showGroup(activeGroup.dataset.target);
-      filiereView.classList.remove('hidden');
-      modulesView.classList.add('hidden');
+      state.filiere = null;
+      state.filiereLabel = '';
+      render();
+      focusPanel();
     });
 
     document.getElementById('year').textContent = new Date().getFullYear();
-    showHome();
+    render();
   </script>
 </body>
 </html>
