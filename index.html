@@ -31,14 +31,17 @@
     }
 
     header {
-      background: var(--primary);
-      color: #fff;
+      background: #ffffff;
+      color: var(--primary);
       padding: 1.25rem 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 1rem;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid rgba(39, 64, 96, 0.12);
     }
 
     .brand {
@@ -68,57 +71,186 @@
       opacity: 0.85;
     }
 
-    nav {
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    nav.nav-wrapper {
       display: flex;
       gap: 0.5rem;
       flex-wrap: wrap;
-      flex: 1 1 320px;
+      flex: 1 1 auto;
       justify-content: flex-end;
-      overflow-x: auto;
-      scrollbar-width: thin;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .nav-wrapper {
-      width: auto;
+      align-items: center;
     }
 
     .nav-list {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.75rem;
       flex-wrap: wrap;
       justify-content: flex-end;
     }
 
-    nav button,
     .nav-list button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: rgba(255, 255, 255, 0.15);
-      color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: rgba(39, 64, 96, 0.08);
+      color: var(--primary);
+      border: 1px solid rgba(39, 64, 96, 0.16);
       border-radius: 999px;
-      padding: 0.65rem 1.25rem;
+      padding: 0.6rem 1.2rem;
       font-size: 0.95rem;
       cursor: pointer;
       transition: background 0.2s ease, transform 0.2s ease;
     }
 
-    nav button:hover,
-    nav button:focus,
     .nav-list button:hover,
     .nav-list button:focus {
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(39, 64, 96, 0.16);
       transform: translateY(-2px);
       outline: none;
     }
 
-    nav button.active,
     .nav-list button.active {
       background: var(--accent);
       color: #1a1a1a;
       border-color: var(--accent);
+    }
+
+    .nav-toggle {
+      display: none;
+      position: relative;
+      width: 44px;
+      height: 44px;
+      border-radius: 999px;
+      border: 1px solid rgba(39, 64, 96, 0.2);
+      background: #ffffff;
+      color: var(--primary);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    .nav-toggle:hover,
+    .nav-toggle:focus {
+      background: rgba(39, 64, 96, 0.08);
+      outline: none;
+    }
+
+    .nav-toggle .nav-toggle-bar {
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    .nav-toggle::before,
+    .nav-toggle::after {
+      content: "";
+      position: absolute;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      top: 50%;
+      left: 50%;
+      transform-origin: center;
+    }
+
+    .nav-toggle::before {
+      transform: translate(-50%, -50%) translateY(-6px);
+    }
+
+    .nav-toggle::after {
+      transform: translate(-50%, -50%) translateY(6px);
+    }
+
+    .nav-toggle.open .nav-toggle-bar {
+      opacity: 0;
+    }
+
+    .nav-toggle.open::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .nav-toggle.open::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .nav-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(16, 24, 32, 0.35);
+      backdrop-filter: blur(2px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.2s ease;
+      z-index: 110;
+    }
+
+    .nav-backdrop.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .mobile-nav-header {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 2rem;
+    }
+
+    .mobile-nav-header img {
+      width: 58px;
+      height: auto;
+    }
+
+    .nav-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(39, 64, 96, 0.2);
+      background: #ffffff;
+      color: var(--primary);
+      position: relative;
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-close::before,
+    .nav-close::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 18px;
+      height: 2px;
+      background: currentColor;
+      transform-origin: center;
+    }
+
+    .nav-close::before {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .nav-close::after {
+      transform: translate(-50%, -50%) rotate(-45deg);
     }
 
     main {
@@ -301,25 +433,58 @@
       font-weight: 600;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 900px) {
       header {
-        flex-direction: column;
-        align-items: flex-start;
+        padding: 1rem 1.25rem;
       }
 
-      nav {
-        width: 100%;
+      .nav-toggle {
+        display: inline-flex;
+      }
+
+      nav.nav-wrapper {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: min(320px, 78vw);
+        background: #ffffff;
+        flex: none;
+        flex-direction: column;
         justify-content: flex-start;
+        align-items: stretch;
+        padding: 2.25rem 1.75rem;
+        box-shadow: -20px 0 40px rgba(16, 24, 32, 0.18);
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+        z-index: 120;
+        overflow-y: auto;
+      }
+
+      nav.nav-wrapper.open {
+        transform: translateX(0);
+      }
+
+      .mobile-nav-header {
+        display: flex;
+      }
+
+      .nav-close {
+        display: inline-flex;
       }
 
       .nav-list {
-        width: 100%;
-        justify-content: flex-start;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
       }
 
-      nav button,
       .nav-list button {
-        flex: 1 1 calc(50% - 0.5rem);
+        width: 100%;
+        justify-content: flex-start;
+        border-radius: 0.85rem;
+        font-size: 1.05rem;
+        padding: 0.85rem 1rem;
       }
 
       main {
@@ -340,19 +505,13 @@
       }
     }
 
-    @media (max-width: 420px) {
+    @media (max-width: 480px) {
       header {
-        padding: 1rem 1.25rem;
+        padding: 0.85rem 1rem;
       }
 
       .brand-text span {
         font-size: 0.78rem;
-      }
-
-      nav button,
-      .nav-list button {
-        flex: 1 1 100%;
-        justify-content: center;
       }
 
       .breadcrumb {
@@ -370,7 +529,15 @@
         <span>Modules &amp; Resources Library</span>
       </div>
     </div>
-    <nav aria-label="Primary" class="nav-wrapper">
+    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="primary-nav">
+      <span class="nav-toggle-bar" aria-hidden="true"></span>
+      <span class="sr-only">Ouvrir le menu</span>
+    </button>
+    <nav aria-label="Navigation principale" class="nav-wrapper" id="primary-nav">
+      <div class="mobile-nav-header">
+        <img src="logo-fsts-drive.svg" alt="FSTS Driver" />
+        <button type="button" class="nav-close" id="nav-close" aria-label="Fermer le menu"></button>
+      </div>
       <div class="nav-list">
         <button type="button" class="nav-btn active" data-target="home" aria-pressed="true">Accueil</button>
         <button type="button" class="nav-btn" data-target="tronc-commun">Tronc commun</button>
@@ -380,6 +547,7 @@
       </div>
     </nav>
   </header>
+  <div class="nav-backdrop" id="nav-backdrop" hidden aria-hidden="true"></div>
 
   <main>
     <section id="home" class="info-section">
@@ -645,6 +813,10 @@
 
   <script>
     const navButtons = document.querySelectorAll('.nav-btn');
+    const navWrapper = document.getElementById('primary-nav');
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const navBackdrop = document.getElementById('nav-backdrop');
     const homeSection = document.getElementById('home');
     const groupPanel = document.getElementById('group-panel');
     const groupView = document.getElementById('group-view');
@@ -654,6 +826,37 @@
     const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
     const breadcrumbGroupBtn = document.getElementById('breadcrumb-group');
     const breadcrumbFiliere = document.getElementById('breadcrumb-filiere');
+
+    function openMobileNav() {
+      if (!navWrapper || !navToggle) return;
+      navWrapper.classList.add('open');
+      navToggle.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      if (navBackdrop) {
+        navBackdrop.classList.add('active');
+        navBackdrop.hidden = false;
+      }
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileNav(shouldFocusToggle = false) {
+      if (!navWrapper || !navToggle) return;
+      navWrapper.classList.remove('open');
+      navToggle.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      if (navBackdrop) {
+        navBackdrop.classList.remove('active');
+        navBackdrop.hidden = true;
+      }
+      document.body.style.removeProperty('overflow');
+      if (shouldFocusToggle) {
+        navToggle.focus();
+      }
+    }
+
+    function isMobileView() {
+      return window.innerWidth <= 900;
+    }
 
     function setActiveNav(target) {
       navButtons.forEach((btn) => {
@@ -719,7 +922,41 @@
         } else {
           showGroup(target);
         }
+        if (isMobileView()) {
+          closeMobileNav();
+        }
       });
+    });
+
+    if (navToggle) {
+      navToggle.addEventListener('click', () => {
+        const expanded = navToggle.getAttribute('aria-expanded') === 'true';
+        if (expanded) {
+          closeMobileNav();
+        } else {
+          openMobileNav();
+        }
+      });
+    }
+
+    if (navClose) {
+      navClose.addEventListener('click', () => closeMobileNav(true));
+    }
+
+    if (navBackdrop) {
+      navBackdrop.addEventListener('click', () => closeMobileNav(true));
+    }
+
+    window.addEventListener('resize', () => {
+      if (!isMobileView()) {
+        closeMobileNav();
+      }
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && navWrapper && navWrapper.classList.contains('open')) {
+        closeMobileNav(true);
+      }
     });
 
     groupView.addEventListener('click', (event) => {
