@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FSTS Driver – Module Vitrine</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --primary: #274060;
+      --accent: #f4a261;
+      --background: #f8f9fb;
+      --card-bg: #ffffff;
+      --text: #1a1a1a;
+      --muted: #5f6c7b;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--background);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .brand img {
+      width: 48px;
+      height: 48px;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+
+    nav button {
+      background: rgba(255, 255, 255, 0.15);
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 999px;
+      padding: 0.65rem 1.25rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+
+    nav button:hover,
+    nav button:focus {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
+      outline: none;
+    }
+
+    nav button.active {
+      background: var(--accent);
+      color: #1a1a1a;
+      border-color: var(--accent);
+    }
+
+    main {
+      width: min(1100px, 92vw);
+      margin: 2rem auto;
+      flex: 1;
+    }
+
+    section {
+      margin-bottom: 2.5rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .info-section {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 20px 40px rgba(39, 64, 96, 0.08);
+    }
+
+    .info-section + .info-section {
+      margin-top: 1.5rem;
+    }
+
+    .flow-panel {
+      background: transparent;
+      padding: 0;
+    }
+
+    .group-grid,
+    .filiere-grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      margin-top: 1.5rem;
+    }
+
+    .tile {
+      background: var(--card-bg);
+      border-radius: 0.9rem;
+      padding: 1.25rem;
+      box-shadow: 0 16px 36px rgba(39, 64, 96, 0.06);
+      border: 1px solid rgba(39, 64, 96, 0.08);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .tile:hover,
+    .tile:focus {
+      transform: translateY(-4px);
+      box-shadow: 0 22px 44px rgba(39, 64, 96, 0.12);
+      outline: none;
+    }
+
+    .tile h3 {
+      margin-bottom: 0.35rem;
+    }
+
+    .tile p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      flex-wrap: wrap;
+      margin-bottom: 1.25rem;
+      color: var(--muted);
+    }
+
+    .breadcrumb button {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-weight: 600;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .modules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .modules-set {
+      display: contents;
+    }
+
+    .module-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.5rem;
+      box-shadow: 0 18px 38px rgba(39, 64, 96, 0.08);
+      border: 1px solid rgba(39, 64, 96, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .module-card h4 {
+      margin: 0;
+      font-size: 1.1rem;
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .link-list a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 0.5rem 0.75rem;
+      background: rgba(244, 162, 97, 0.16);
+      border-radius: 0.75rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .link-list a:hover,
+    .link-list a:focus {
+      background: rgba(244, 162, 97, 0.32);
+      color: #1a1a1a;
+      outline: none;
+    }
+
+    footer {
+      margin-top: auto;
+      background: #101820;
+      color: rgba(255, 255, 255, 0.72);
+      padding: 1.5rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 600px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        width: 100%;
+      }
+
+      nav button {
+        flex: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='60' cy='60' r='58' stroke='%23F4A261' stroke-width='4'/%3E%3Cpath fill='%23F4A261' d='M34 45h52L74 75H46z'/%3E%3Cpath stroke='%23FFFFFF' stroke-width='6' stroke-linecap='round' d='M42 45l12 24 24-24'/%3E%3Cpath fill='%23FFFFFF' d='M43 36h34l5 9H38z'/%3E%3Ctext font-family='Segoe UI, sans-serif' font-size='16' fill='%23FFFFFF' font-weight='600'%3E%3Ctspan x='36' y='99'%3EFSTS%3C/tspan%3E%3C/text%3E%3C/g%3E%3C/svg%3E" alt="FSTS Driver Logo" />
+      <div>
+        <strong>FSTS Driver</strong>
+        <div>Modules &amp; Resources Library</div>
+      </div>
+    </div>
+    <nav aria-label="Primary">
+      <button type="button" class="nav-btn active" data-target="home" aria-pressed="true">Accueil</button>
+      <button type="button" class="nav-btn" data-target="tronc-commun">Tronc commun</button>
+      <button type="button" class="nav-btn" data-target="licence">Licence</button>
+      <button type="button" class="nav-btn" data-target="master">Master</button>
+      <button type="button" class="nav-btn" data-target="ingenieur">Cycle d’ingénieur</button>
+    </nav>
+  </header>
+
+  <main>
+    <section id="home" class="info-section">
+      <h1>Bienvenue sur FSTS Driver</h1>
+      <p>Une vitrine centralisée pour accéder rapidement aux modules, cours et ressources pédagogiques de la Faculté des Sciences et Techniques.</p>
+      <div class="info-section">
+        <h2>WHY THIS WEBSITE?</h2>
+        <p>Centraliser les supports de cours pour toutes les filières. Chaque carte de module vous mène directement aux ressources partagées sur Google Drive : PDF, diapositives, vidéos et dossiers.</p>
+      </div>
+      <div class="info-section">
+        <h2>BUILT BY WHO?</h2>
+        <p>Créé par des étudiants passionnés souhaitant partager leurs ressources avec la communauté FSTS. Ensemble, nous construisons une base de connaissances commune.</p>
+      </div>
+      <div class="info-section">
+        <h2>CONTACT ME</h2>
+        <p>Une suggestion, un fichier manquant ou une mise à jour ? Écrivez à <a href="mailto:contact@fstsdriver.example">contact@fstsdriver.example</a>.</p>
+      </div>
+    </section>
+
+    <section id="group-panel" class="info-section flow-panel hidden" aria-live="polite">
+      <div class="breadcrumb" id="breadcrumb">
+        <button type="button" id="breadcrumb-home">Accueil</button>
+        <span aria-hidden="true" id="breadcrumb-sep">›</span>
+        <button type="button" id="breadcrumb-group"></button>
+        <span id="breadcrumb-filiere" class="hidden"></span>
+      </div>
+
+      <div id="group-view" class="group-grid" role="list">
+        <button type="button" class="tile" data-group="tronc-commun">
+          <h3>Tronc commun</h3>
+          <p>Analyse, programmation et bases scientifiques.</p>
+        </button>
+        <button type="button" class="tile" data-group="licence">
+          <h3>Licence</h3>
+          <p>Filières professionnelles et fondamentales.</p>
+        </button>
+        <button type="button" class="tile" data-group="master">
+          <h3>Master</h3>
+          <p>Spécialisations avancées et projets.</p>
+        </button>
+        <button type="button" class="tile" data-group="ingenieur">
+          <h3>Cycle d’ingénieur</h3>
+          <p>Formation d’ingénieur et expertise technique.</p>
+        </button>
+      </div>
+
+      <div id="filiere-view" class="filiere-grid hidden" role="list">
+        <button type="button" class="tile" data-group="tronc-commun" data-filiere="maths-fondamentales">
+          <h3>Mathématiques Fondamentales</h3>
+          <p>Analyse, algèbre et outils de base.</p>
+        </button>
+        <button type="button" class="tile" data-group="tronc-commun" data-filiere="informatique-intro">
+          <h3>Informatique Intro</h3>
+          <p>Programmation et structures de données.</p>
+        </button>
+        <button type="button" class="tile" data-group="licence" data-filiere="gi">
+          <h3>Génie Informatique (GI)</h3>
+          <p>Développement logiciel et systèmes.</p>
+        </button>
+        <button type="button" class="tile" data-group="licence" data-filiere="gc">
+          <h3>Génie Civil (GC)</h3>
+          <p>Structures, matériaux et topographie.</p>
+        </button>
+        <button type="button" class="tile" data-group="master" data-filiere="msd">
+          <h3>Management des Systèmes Décisionnels (MSD)</h3>
+          <p>Business intelligence et gouvernance.</p>
+        </button>
+        <button type="button" class="tile" data-group="master" data-filiere="sitd">
+          <h3>Sécurité &amp; Ingénierie des Technologies de Données (SITD)</h3>
+          <p>Sécurité, Big Data et infrastructures.</p>
+        </button>
+        <button type="button" class="tile" data-group="ingenieur" data-filiere="imi">
+          <h3>Ingénierie Mécatronique et Industrielle (IMI)</h3>
+          <p>Automatisation et robotique.</p>
+        </button>
+        <button type="button" class="tile" data-group="ingenieur" data-filiere="irssi">
+          <h3>Ingénierie des Réseaux et Systèmes Sécurisés (IRSSI)</h3>
+          <p>Systèmes, réseaux et cybersécurité.</p>
+        </button>
+        <button type="button" class="tile" data-group="ingenieur" data-filiere="qhse">
+          <h3>Qualité, Hygiène, Sécurité, Environnement (QHSE)</h3>
+          <p>Gestion des risques et conformité.</p>
+        </button>
+      </div>
+
+      <div id="modules-view" class="modules-grid hidden" role="list">
+        <section class="modules-set hidden" data-group="tronc-commun" data-filiere="maths-fondamentales">
+          <article class="module-card">
+            <h4>Analyse I</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/1aExampleMathAnalyse1/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Analyse I</a>
+              <a href="https://drive.google.com/file/d/1bExampleMathAnalyse1TD/view" target="_blank" rel="noopener noreferrer">📝 TD – Analyse I</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Algorithmique I</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/1cExampleAlgoCours/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Algorithmique I</a>
+              <a href="https://drive.google.com/file/d/1dExampleAlgoTP/view" target="_blank" rel="noopener noreferrer">💻 TP – Algorithmique I</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Physique Générale</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/1eExamplePhysique/view" target="_blank" rel="noopener noreferrer">📽️ Vidéo – Cinématique</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="tronc-commun" data-filiere="informatique-intro">
+          <article class="module-card">
+            <h4>Programmation C</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/1fExampleProgC/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Programmation C</a>
+              <a href="https://drive.google.com/drive/folders/1gExampleProgCFolder" target="_blank" rel="noopener noreferrer">📁 Dossier – Exercices et corrections</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Architecture des Ordinateurs</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/1hExampleArchCours/view" target="_blank" rel="noopener noreferrer">📊 Slides – Architecture</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="licence" data-filiere="gi">
+          <article class="module-card">
+            <h4>Structures de Données Avancées</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/2aExampleSDA/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Structures de Données</a>
+              <a href="https://drive.google.com/file/d/2bExampleSDA/view" target="_blank" rel="noopener noreferrer">📝 TD – Listes et arbres</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Développement Web</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/2cExampleWebSlides/view" target="_blank" rel="noopener noreferrer">📊 Slides – HTML &amp; CSS</a>
+              <a href="https://drive.google.com/drive/folders/2dExampleWebFolder" target="_blank" rel="noopener noreferrer">📁 Dossier – Projets</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Bases de Données</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/2eExampleBDD/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – SQL</a>
+              <a href="https://drive.google.com/file/d/2fExampleBDDTP/view" target="_blank" rel="noopener noreferrer">🧪 TP – Modélisation</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="licence" data-filiere="gc">
+          <article class="module-card">
+            <h4>Mécanique des Structures</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/2gExampleMeca/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Mécanique</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Résistance des Matériaux</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/2hExampleRDM/view" target="_blank" rel="noopener noreferrer">📊 Slides – RDM</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Topographie</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/drive/folders/2iExampleTopoFolder" target="_blank" rel="noopener noreferrer">📁 Dossier – Travaux pratiques</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="master" data-filiere="msd">
+          <article class="module-card">
+            <h4>Data Warehouse</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/3aExampleDW/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Modélisation multidimensionnelle</a>
+              <a href="https://drive.google.com/file/d/3bExampleDWTP/view" target="_blank" rel="noopener noreferrer">🧪 TP – ETL avec Talend</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Data Mining</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/3cExampleDM/view" target="_blank" rel="noopener noreferrer">📊 Slides – Classification</a>
+              <a href="https://drive.google.com/drive/folders/3dExampleDMFolder" target="_blank" rel="noopener noreferrer">📁 Dossier – Jeux de données</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="master" data-filiere="sitd">
+          <article class="module-card">
+            <h4>Sécurité Réseau</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/3eExampleSecReseau/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Sécurité réseau</a>
+              <a href="https://drive.google.com/file/d/3fExampleSecLab/view" target="_blank" rel="noopener noreferrer">🧪 TP – Pare-feux</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Big Data Processing</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/drive/folders/3gExampleBigData" target="_blank" rel="noopener noreferrer">📁 Dossier – TP Spark</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="ingenieur" data-filiere="imi">
+          <article class="module-card">
+            <h4>Automatique Avancée</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/4aExampleAuto/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Automatique</a>
+              <a href="https://drive.google.com/file/d/4bExampleAuto/view" target="_blank" rel="noopener noreferrer">📊 Slides – Commande PID</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Robotique</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/drive/folders/4cExampleRobot" target="_blank" rel="noopener noreferrer">📁 Dossier – Projets</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="ingenieur" data-filiere="irssi">
+          <article class="module-card">
+            <h4>Administration Système Avancée</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/4dExampleSysAdmin/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Linux avancé</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Audit de Sécurité</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/drive/folders/4eExampleAudit" target="_blank" rel="noopener noreferrer">📁 Dossier – Guides d’audit</a>
+              <a href="https://drive.google.com/file/d/4fExampleAuditSlides/view" target="_blank" rel="noopener noreferrer">📊 Slides – Outils et méthodologie</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="modules-set hidden" data-group="ingenieur" data-filiere="qhse">
+          <article class="module-card">
+            <h4>Management QSE</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/4gExampleQSE/view" target="_blank" rel="noopener noreferrer">📄 Cours PDF – Normes ISO</a>
+            </div>
+          </article>
+          <article class="module-card">
+            <h4>Gestion de Crise</h4>
+            <div class="link-list">
+              <a href="https://drive.google.com/file/d/4hExampleCrisis/view" target="_blank" rel="noopener noreferrer">🎥 Vidéo – Gestion d’incident</a>
+            </div>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © <span id="year"></span> FSTS Driver — Ressources partagées par la communauté.
+  </footer>
+
+  <script>
+    const navButtons = document.querySelectorAll('.nav-btn');
+    const homeSection = document.getElementById('home');
+    const groupPanel = document.getElementById('group-panel');
+    const groupView = document.getElementById('group-view');
+    const filiereView = document.getElementById('filiere-view');
+    const modulesView = document.getElementById('modules-view');
+    const breadcrumbHome = document.getElementById('breadcrumb-home');
+    const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
+    const breadcrumbGroupBtn = document.getElementById('breadcrumb-group');
+    const breadcrumbFiliere = document.getElementById('breadcrumb-filiere');
+
+    function setActiveNav(target) {
+      navButtons.forEach((btn) => {
+        const isActive = btn.dataset.target === target;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-pressed', isActive);
+      });
+    }
+
+    function showHome() {
+      setActiveNav('home');
+      homeSection.classList.remove('hidden');
+      groupPanel.classList.add('hidden');
+      groupView.classList.remove('hidden');
+      filiereView.classList.add('hidden');
+      modulesView.classList.add('hidden');
+      modulesView.querySelectorAll('.modules-set').forEach((set) => set.classList.add('hidden'));
+      breadcrumbGroupBtn.textContent = '';
+      breadcrumbGroupBtn.classList.add('hidden');
+      breadcrumbSeparator.classList.add('hidden');
+      breadcrumbFiliere.classList.add('hidden');
+      breadcrumbFiliere.textContent = '';
+    }
+
+    function showGroup(groupKey) {
+      setActiveNav(groupKey);
+      homeSection.classList.add('hidden');
+      groupPanel.classList.remove('hidden');
+      groupView.classList.add('hidden');
+      filiereView.classList.remove('hidden');
+      modulesView.classList.add('hidden');
+      modulesView.querySelectorAll('.modules-set').forEach((set) => set.classList.add('hidden'));
+      breadcrumbGroupBtn.textContent = document.querySelector(`.nav-btn[data-target="${groupKey}"]`).textContent;
+      breadcrumbGroupBtn.classList.remove('hidden');
+      breadcrumbSeparator.classList.remove('hidden');
+      breadcrumbFiliere.classList.add('hidden');
+      breadcrumbFiliere.textContent = '';
+
+      filiereView.querySelectorAll('.tile').forEach((tile) => {
+        tile.classList.toggle('hidden', tile.dataset.group !== groupKey);
+      });
+    }
+
+    function showModules(groupKey, filiereKey, filiereLabel) {
+      modulesView.classList.remove('hidden');
+      groupView.classList.add('hidden');
+      filiereView.classList.add('hidden');
+      breadcrumbFiliere.textContent = `› ${filiereLabel}`;
+      breadcrumbFiliere.classList.remove('hidden');
+
+      modulesView.querySelectorAll('.modules-set').forEach((set) => {
+        const match = set.dataset.group === groupKey && set.dataset.filiere === filiereKey;
+        set.classList.toggle('hidden', !match);
+      });
+    }
+
+    navButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const target = button.dataset.target;
+        if (target === 'home') {
+          showHome();
+          groupView.classList.remove('hidden');
+        } else {
+          showGroup(target);
+        }
+      });
+    });
+
+    groupView.addEventListener('click', (event) => {
+      const tile = event.target.closest('.tile');
+      if (!tile) return;
+      const groupKey = tile.dataset.group;
+      if (groupKey) {
+        showGroup(groupKey);
+      }
+    });
+
+    filiereView.addEventListener('click', (event) => {
+      const tile = event.target.closest('.tile');
+      if (!tile) return;
+      const { group: groupKey, filiere: filiereKey } = tile.dataset;
+      if (groupKey && filiereKey) {
+        const label = tile.querySelector('h3').textContent;
+        showModules(groupKey, filiereKey, label);
+      }
+    });
+
+    breadcrumbHome.addEventListener('click', () => {
+      showHome();
+      groupView.classList.remove('hidden');
+    });
+
+    breadcrumbGroupBtn.addEventListener('click', () => {
+      const activeGroup = [...navButtons].find((btn) => btn.classList.contains('active'));
+      if (!activeGroup || activeGroup.dataset.target === 'home') {
+        showHome();
+        groupView.classList.remove('hidden');
+        return;
+      }
+      showGroup(activeGroup.dataset.target);
+      filiereView.classList.remove('hidden');
+      modulesView.classList.add('hidden');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+    showHome();
+  </script>
+</body>
+</html>
