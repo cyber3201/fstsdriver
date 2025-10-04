@@ -1,0 +1,8 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">FSTS Drive Globale logo</title>
+  <desc id="logoDesc">Stylised blue folder with FSTS Drive Globale text</desc>
+  <rect x="16" y="60" width="168" height="124" rx="28" fill="#0c3f78" />
+  <path d="M16 80c0-11 9-20 20-20h48l10 12h80v28H16V80z" fill="#eca53c"/>
+  <text x="50%" y="120" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif" font-weight="700" font-size="48" fill="#f7be45">FSTS</text>
+  <text x="50%" y="150" text-anchor="middle" font-family="'Segoe UI', 'Arial', sans-serif" font-weight="700" font-size="16" letter-spacing="3" fill="#ffffff">DRIVE GLOBALE</text>
+</svg>
