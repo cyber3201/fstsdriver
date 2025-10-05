@@ -394,8 +394,8 @@ nav.nav-wrapper {
     width: min(1240px, 88vw);
   }
 
+  .home-catalog-grid,
   .catalog-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
     gap: 2.5rem;
   }
 
@@ -411,6 +411,16 @@ nav.nav-wrapper {
   .catalog-card p,
   .catalog-card span {
     font-size: 1.05rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .home-catalog-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(260px, 280px));
+    width: fit-content;
+    max-width: 100%;
+    margin-inline: auto;
   }
 }
 
