@@ -11,27 +11,118 @@
     />
     <title>Pourquoi FSTS Driver ?</title>
     <style>
+      :root {
+        --primary: #1f2a44;
+        --accent: #f0a500;
+        --background-light: linear-gradient(180deg, #f3f5fb 0%, #ffffff 100%);
+        --card-border: rgba(31, 42, 68, 0.08);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
       body {
         margin: 0;
         font-family: "Readex Pro", "Rubik", -apple-system, BlinkMacSystemFont,
           "Segoe UI", sans-serif;
-        background: linear-gradient(180deg, #f3f5fb 0%, #ffffff 100%);
-        color: #1f2a44;
+        background: var(--background-light);
+        color: var(--primary);
         min-height: 100vh;
-        display: grid;
-        place-items: center;
-        padding: clamp(2rem, 5vw, 4rem) clamp(1.5rem, 6vw, 4rem);
+        display: flex;
+        flex-direction: column;
         line-height: 1.65;
       }
 
+      header {
+        background: #ffffff;
+        color: var(--primary);
+        padding: 0.85rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid rgba(39, 64, 96, 0.12);
+        box-shadow: 0 6px 16px rgba(15, 25, 40, 0.08);
+      }
+
+      .brand {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        flex-direction: column;
+        gap: 0.1rem;
+      }
+
+      .brand strong {
+        font-size: clamp(1.1rem, 2.4vw, 1.5rem);
+      }
+
+      .brand span {
+        font-size: clamp(0.78rem, 1.8vw, 0.95rem);
+        opacity: 0.85;
+      }
+
+      .nav-wrapper {
+        display: flex;
+        justify-content: flex-end;
+        flex: 1 1 auto;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 0.65rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        padding: 0.55rem 1.1rem;
+        border-radius: 999px;
+        border: 1px solid rgba(31, 42, 68, 0.12);
+        background: #ffffff;
+        box-shadow: 0 10px 24px rgba(31, 42, 68, 0.08);
+        transition: background 0.2s ease, box-shadow 0.2s ease,
+          border-color 0.2s ease;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus {
+        background: rgba(240, 165, 0, 0.12);
+        border-color: rgba(31, 42, 68, 0.28);
+        outline: none;
+        box-shadow: 0 14px 28px rgba(31, 42, 68, 0.12);
+      }
+
+      .nav-link.active {
+        background: var(--accent);
+        color: #1a1a1a;
+        border-color: transparent;
+        box-shadow: 0 18px 36px rgba(240, 165, 0, 0.28);
+      }
+
       main {
-        max-width: 820px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        padding: clamp(2rem, 6vw, 4rem) clamp(1.5rem, 6vw, 4rem) clamp(3rem, 7vw, 4.5rem);
+      }
+
+      .page-shell {
+        width: min(860px, 92vw);
         background: #ffffff;
         border-radius: 1.5rem;
         padding: clamp(2rem, 6vw, 3.5rem);
         box-shadow: 0 30px 80px rgba(31, 42, 68, 0.12);
         display: grid;
         gap: 1.5rem;
+        border: 1px solid var(--card-border);
       }
 
       h1 {
@@ -45,7 +136,7 @@
       }
 
       a {
-        color: #f0a500;
+        color: var(--accent);
         font-weight: 600;
         text-decoration: none;
       }
@@ -72,7 +163,7 @@
         padding: 0.75rem 1.5rem;
         border-radius: 999px;
         border: none;
-        background: #1f2a44;
+        background: var(--primary);
         color: #ffffff;
         font-weight: 600;
         cursor: pointer;
@@ -87,29 +178,157 @@
         box-shadow: 0 22px 48px rgba(31, 42, 68, 0.32);
         outline: none;
       }
+
+      footer {
+        background: #101820;
+        color: rgba(255, 255, 255, 0.85);
+        padding: 1.75rem 1.5rem;
+      }
+
+      .footer-shell {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .footer-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .footer-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+
+      .footer-text span:first-child {
+        font-weight: 600;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        color: rgba(255, 255, 255, 0.75);
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .footer-links a:hover,
+      .footer-links a:focus {
+        color: #ffd15c;
+        outline: none;
+      }
+
+      .footer-bottom {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.65rem;
+        justify-content: space-between;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.65);
+      }
+
+      @media (max-width: 720px) {
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 0.75rem;
+        }
+
+        .nav-wrapper {
+          width: 100%;
+        }
+
+        .nav-list {
+          justify-content: flex-start;
+        }
+
+        .page-shell {
+          padding: clamp(1.75rem, 7vw, 3rem);
+        }
+
+        .footer-bottom {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
     </style>
   </head>
   <body>
+    <header>
+      <a class="brand" href="index.html">
+        <strong>FSTS Driver</strong>
+        <span>Modules &amp; Resources Library</span>
+      </a>
+      <nav class="nav-wrapper" aria-label="Navigation principale">
+        <div class="nav-list">
+          <a class="nav-link" href="index.html">Accueil</a>
+          <a class="nav-link" href="index.html#home-catalog">Nos Filières</a>
+          <a class="nav-link active" href="why.html">Pourquoi ?</a>
+          <a class="nav-link" href="team.html">L’équipe</a>
+        </div>
+      </nav>
+    </header>
+
     <main>
-      <h1>Pourquoi FSTS Driver existe&nbsp;?</h1>
-      <p>
-        FSTS Driver est né d’un constat simple&nbsp;: les ressources pédagogiques
-        de la faculté étaient éparpillées entre plusieurs comptes Google Drive,
-        groupes privés et clés USB partagées entre promotions. Pour gagner du
-        temps et offrir un accès équitable à tous les étudiants, nous avons
-        regroupé dans un même espace les cours, TDs, TPs, examens et annales de
-        l’ensemble des filières.
-      </p>
-      <p>
-        Le site permet ainsi de retrouver en quelques clics la bonne ressource,
-        dans sa dernière version, et de la partager facilement avec ses
-        camarades. Notre ambition est de maintenir une bibliothèque vivante,
-        enrichie par la communauté et mise à jour au fil des semestres.
-      </p>
-      <div class="actions">
-        <a class="btn" href="index.html">Retourner à l’accueil</a>
-        <a href="team.html">Découvrir qui maintient FSTS Driver →</a>
-      </div>
+      <article class="page-shell">
+        <h1>Pourquoi FSTS Driver existe&nbsp;?</h1>
+        <p>
+          FSTS Driver est né d’un constat simple&nbsp;: les ressources pédagogiques
+          de la faculté étaient éparpillées entre plusieurs comptes Google Drive,
+          groupes privés et clés USB partagées entre promotions. Pour gagner du
+          temps et offrir un accès équitable à tous les étudiants, nous avons
+          regroupé dans un même espace les cours, TDs, TPs, examens et annales de
+          l’ensemble des filières.
+        </p>
+        <p>
+          Le site permet ainsi de retrouver en quelques clics la bonne ressource,
+          dans sa dernière version, et de la partager facilement avec ses
+          camarades. Notre ambition est de maintenir une bibliothèque vivante,
+          enrichie par la communauté et mise à jour au fil des semestres.
+        </p>
+        <div class="actions">
+          <a class="btn" href="index.html">Retourner à l’accueil</a>
+          <a href="team.html">Découvrir qui maintient FSTS Driver →</a>
+        </div>
+      </article>
     </main>
+
+    <footer>
+      <div class="footer-shell">
+        <div class="footer-top">
+          <div class="footer-text">
+            <span>FSTS Driver</span>
+            <span>Modules &amp; Resources Library</span>
+          </div>
+          <nav class="footer-links" aria-label="Liens secondaires">
+            <a href="index.html">Accueil</a>
+            <a href="index.html#home-catalog">Filières</a>
+            <a href="why.html">Pourquoi ?</a>
+            <a href="team.html">L’équipe</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© <span id="year"></span> Ressources partagées par la communauté.</span>
+          <span>Conçu avec passion pour la communauté FSTS.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const yearTarget = document.getElementById("year");
+      if (yearTarget) {
+        yearTarget.textContent = new Date().getFullYear();
+      }
+    </script>
   </body>
 </html>
