@@ -14,9 +14,6 @@
       --text: #1a1a1a;
       --muted: #5f6c7b;
       --border: rgba(31, 42, 68, 0.12);
-      --splash-blur: 1.5px;
-      --splash-radius: 18px;
-      --splash-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
     }
 
     * {
@@ -94,6 +91,226 @@
       justify-content: flex-end;
       align-items: center;
       flex-wrap: wrap;
+    }
+
+    .home-section {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: clamp(1.5rem, 4vw, 3rem);
+      padding: clamp(1.5rem, 4vw, 3rem);
+      background: linear-gradient(135deg, rgba(31, 42, 68, 0.97), rgba(31, 42, 68, 0.8));
+      border-radius: 1.5rem;
+      box-shadow: 0 24px 48px rgba(12, 20, 38, 0.3);
+      color: #ffffff;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(125deg, rgba(12, 20, 38, 0.85) 0%, rgba(12, 20, 38, 0.5) 55%, rgba(12, 20, 38, 0.2) 100%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      display: contents;
+    }
+
+    .hero-copy {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      width: fit-content;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255, 204, 77, 0.12);
+      color: #ffdd85;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 4.2vw, 3rem);
+      line-height: 1.1;
+      margin: 0;
+    }
+
+    .hero-title span {
+      color: #ffd15c;
+    }
+
+    .hero-text {
+      margin: 0;
+      font-size: clamp(1rem, 2.1vw, 1.2rem);
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .hero-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 500;
+    }
+
+    .hero-list li {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.5rem;
+      border-radius: 999px;
+      border: none;
+      background: #ffcc4d;
+      color: #101820;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      box-shadow: 0 16px 32px rgba(255, 204, 77, 0.35);
+    }
+
+    .hero-cta:hover,
+    .hero-cta:focus {
+      transform: translateY(-2px);
+      box-shadow: 0 20px 44px rgba(255, 204, 77, 0.45);
+      outline: none;
+    }
+
+    .hero-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .hero-secondary:hover,
+    .hero-secondary:focus {
+      color: #ffd15c;
+      outline: none;
+    }
+
+    .hero-media {
+      position: relative;
+      display: grid;
+      place-items: center;
+    }
+
+    .hero-image-frame {
+      position: relative;
+      width: min(320px, 80%);
+      aspect-ratio: 1;
+      border-radius: 1.5rem;
+      overflow: hidden;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+      border: 6px solid rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(2px);
+    }
+
+    .hero-image-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-note {
+      position: absolute;
+      bottom: 10%;
+      right: 8%;
+      background: rgba(255, 255, 255, 0.95);
+      color: var(--primary);
+      border-radius: 1rem;
+      padding: 0.75rem 1rem;
+      box-shadow: 0 18px 36px rgba(15, 25, 40, 0.28);
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+      max-width: 180px;
+      text-align: left;
+    }
+
+    .hero-note strong {
+      font-size: 1.5rem;
+      line-height: 1.1;
+    }
+
+    .hero-note span {
+      font-size: 0.85rem;
+      color: rgba(31, 42, 68, 0.75);
+    }
+
+    .info-grid {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .info-card {
+      background: var(--card-bg);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      box-shadow: 0 20px 40px rgba(39, 64, 96, 0.08);
+      border: 1px solid rgba(39, 64, 96, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .info-card a {
+      color: var(--accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .info-card a:hover,
+    .info-card a:focus {
+      text-decoration: underline;
+      outline: none;
     }
 
     .nav-list {
@@ -389,122 +606,6 @@
       font-weight: 600;
     }
 
-    body.splash-lock {
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .splash {
-      position: fixed;
-      inset: 0;
-      z-index: 9999;
-      display: grid;
-      place-items: center;
-      overflow: hidden;
-      background: #0b1220;
-    }
-
-    .splash__backdrop {
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(1200px 600px at 10% 10%, rgba(255, 255, 255, 0.06), transparent 60%),
-        radial-gradient(1200px 600px at 90% 90%, rgba(255, 255, 255, 0.05), transparent 60%);
-      pointer-events: none;
-    }
-
-    .splash__content {
-      position: relative;
-      width: min(980px, 92vw);
-      aspect-ratio: 16 / 9;
-      border-radius: var(--splash-radius);
-      overflow: clip;
-      box-shadow: var(--splash-shadow);
-    }
-
-    .splash__bg {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: blur(var(--splash-blur)) saturate(1.05);
-      transform: scale(1.03);
-    }
-
-    .splash__overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(180deg, rgba(4, 8, 20, 0.5) 0%, rgba(4, 8, 20, 0.75) 45%, rgba(4, 8, 20, 0.95) 100%),
-        rgba(0, 0, 0, 0.1);
-    }
-
-    .splash__inner {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      padding: clamp(16px, 3.5vw, 36px);
-      display: grid;
-      align-content: end;
-      gap: 18px;
-      color: #fff;
-    }
-
-    .splash__title {
-      font-size: clamp(28px, 3.6vw, 44px);
-      line-height: 1.1;
-      margin: 0 0 6px;
-      letter-spacing: 0.2px;
-    }
-
-    .splash__title span {
-      color: #ffd15c;
-    }
-
-    .splash__text {
-      font-size: clamp(14px, 1.5vw, 18px);
-      opacity: 0.92;
-      max-width: 70ch;
-      margin: 0;
-    }
-
-    .splash__btn {
-      margin-top: 10px;
-      width: fit-content;
-      padding: 12px 20px;
-      font-weight: 600;
-      border: 0;
-      border-radius: 12px;
-      background: #ffcc4d;
-      color: #131722;
-      cursor: pointer;
-      transition: transform 0.08s ease, filter 0.2s ease;
-    }
-
-    .splash__btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.05);
-    }
-
-    .splash__btn:active {
-      transform: translateY(0);
-    }
-
-    .splash__hint {
-      font-size: 12px;
-      opacity: 0.7;
-    }
-
-    .splash--hide {
-      animation: splashFade 0.45s ease forwards;
-    }
-
-    @keyframes splashFade {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
     @media (max-width: 900px) {
       header {
         padding: 1rem 1.25rem;
@@ -512,6 +613,26 @@
 
       .brand {
         flex: 1;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 2.25rem 1.75rem;
+      }
+
+      .hero-media {
+        margin-top: 0.5rem;
+      }
+
+      .hero-image-frame {
+        width: min(260px, 65%);
+      }
+
+      .hero-note {
+        position: static;
+        margin-top: 1rem;
+        align-self: center;
+        text-align: center;
       }
 
       .nav-toggle {
@@ -590,6 +711,18 @@
         font-size: 0.78rem;
       }
 
+      .hero {
+        padding: 1.75rem 1.25rem;
+      }
+
+      .hero-title {
+        font-size: 2.1rem;
+      }
+
+      .hero-list li {
+        width: 100%;
+      }
+
       .breadcrumb {
         font-size: 0.85rem;
       }
@@ -597,32 +730,6 @@
   </style>
 </head>
 <body>
-  <!-- Splash / Hero d'accueil -->
-  <div id="splash" class="splash" aria-label="Écran d’accueil" role="dialog" aria-modal="true">
-    <div class="splash__backdrop" aria-hidden="true"></div>
-
-    <div class="splash__content" role="document" tabindex="-1">
-      <img src="https://i.ibb.co/QjhxL4pB/cover.png" alt="" class="splash__bg" aria-hidden="true" />
-
-      <div class="splash__overlay"></div>
-
-      <div class="splash__inner">
-        <h1 class="splash__title">Bienvenue sur <span>FSTS Driver</span></h1>
-        <p class="splash__text">
-          La plateforme officielle qui centralise tous les modules, cours et ressources pédagogiques de la Faculté des Sciences et
-          Techniques de Settat. Retrouvez ici les liens Google Drive de toutes les filières : PDF, diapositives, TD/TP, vidéos et
-          dossiers. Besoin d’un cours ou d’un document ? Tout est ici.
-        </p>
-
-        <button id="enterBtn" class="splash__btn" aria-label="Entrer sur le site">
-          Entrer sur le site
-        </button>
-
-        <div class="splash__hint">Appuyez sur Entrer pour continuer</div>
-      </div>
-    </div>
-  </div>
-
   <header>
     <div class="brand">
       <img src="logo-fsts-drive.svg" alt="FSTS Driver logo" />
@@ -647,20 +754,58 @@
   </header>
 
   <main>
-    <section id="home" class="info-section">
-      <h1>Bienvenue sur FSTS Driver</h1>
-      <p>Une vitrine centralisée pour accéder rapidement aux modules, cours et ressources pédagogiques de la Faculté des Sciences et Techniques.</p>
-      <div class="info-section">
-        <h2>WHY THIS WEBSITE?</h2>
-        <p>Centraliser les supports de cours pour toutes les filières. Chaque carte de module vous mène directement aux ressources partagées sur Google Drive : PDF, diapositives, vidéos et dossiers.</p>
+    <section id="home" class="home-section">
+      <div class="hero">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <span class="hero-badge">Plateforme officielle FSTS</span>
+            <h1 class="hero-title">Bienvenue sur <span>FSTS Driver</span></h1>
+            <p class="hero-text">
+              La plateforme qui centralise tous les modules, cours et ressources pédagogiques de la Faculté des Sciences et Techniques de Settat.
+              Retrouvez les liens Google Drive classés par groupe, filière et type de document.
+            </p>
+            <ul class="hero-list">
+              <li>📄 Cours PDF, TD &amp; TP</li>
+              <li>🎥 Vidéos et présentations</li>
+              <li>📁 Dossiers partagés par filière</li>
+            </ul>
+            <div class="hero-actions">
+              <button type="button" class="hero-cta" id="hero-cta" aria-controls="group-panel">Explorer les filières</button>
+              <a class="hero-secondary" href="#contact">Contacter l’équipe →</a>
+            </div>
+          </div>
+          <div class="hero-media">
+            <div class="hero-image-frame">
+              <img src="https://i.ibb.co/QjhxL4pB/cover.png" alt="Aperçu des ressources pédagogiques FSTS" loading="lazy" />
+            </div>
+            <div class="hero-note">
+              <strong>+120</strong>
+              <span>Ressources partagées par la communauté</span>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="info-section">
-        <h2>BUILT BY WHO?</h2>
-        <p>Créé par des étudiants passionnés souhaitant partager leurs ressources avec la communauté FSTS. Ensemble, nous construisons une base de connaissances commune.</p>
-      </div>
-      <div class="info-section">
-        <h2>CONTACT ME</h2>
-        <p>Une suggestion, un fichier manquant ou une mise à jour ? Écrivez à <a href="mailto:contact@fstsdriver.example">contact@fstsdriver.example</a>.</p>
+
+      <div class="info-grid">
+        <article class="info-card">
+          <h2>WHY THIS WEBSITE?</h2>
+          <p>
+            Centraliser les supports de cours pour toutes les filières. Chaque carte de module vous mène directement aux ressources partagées sur Google Drive : PDF, diapositives, vidéos et dossiers.
+          </p>
+        </article>
+        <article class="info-card">
+          <h2>BUILT BY WHO?</h2>
+          <p>
+            Créé par des étudiants passionnés souhaitant partager leurs ressources avec la communauté FSTS. Ensemble, nous construisons une base de connaissances commune.
+          </p>
+        </article>
+        <article class="info-card" id="contact">
+          <h2>CONTACT ME</h2>
+          <p>
+            Une suggestion, un fichier manquant ou une mise à jour ? Écrivez à
+            <a href="mailto:contact@fstsdriver.example">contact@fstsdriver.example</a> ou partagez vos ressources.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -909,38 +1054,6 @@
   </footer>
 
   <script>
-    (function () {
-      const STORAGE_KEY = 'fstsd_splash_seen_v1';
-      const splash = document.getElementById('splash');
-      const btn = document.getElementById('enterBtn');
-
-      const alreadySeen = localStorage.getItem(STORAGE_KEY) === '1';
-
-      function hideSplash() {
-        if (!splash) return;
-        splash.classList.add('splash--hide');
-        document.body.classList.remove('splash-lock');
-        localStorage.setItem(STORAGE_KEY, '1');
-        splash.setAttribute('aria-hidden', 'true');
-      }
-
-      if (!alreadySeen && splash) {
-        document.body.classList.add('splash-lock');
-        btn?.addEventListener('click', hideSplash);
-        window.addEventListener('keydown', (e) => {
-          if (['Enter', ' ', 'Spacebar', 'Escape', 'Esc'].includes(e.key)) hideSplash();
-        });
-        requestAnimationFrame(() => {
-          splash.querySelector('.splash__content')?.focus();
-        });
-      } else {
-        splash?.remove();
-        document.body.classList.remove('splash-lock');
-      }
-    })();
-  </script>
-
-  <script>
     const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
     const navWrapper = document.getElementById('primary-nav');
     const navToggle = document.getElementById('nav-toggle');
@@ -957,6 +1070,7 @@
     const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
     const breadcrumbGroupBtn = document.getElementById('breadcrumb-group');
     const breadcrumbFiliere = document.getElementById('breadcrumb-filiere');
+    const heroCta = document.getElementById('hero-cta');
 
     const navLabels = Object.fromEntries(
       navButtons.map((btn) => [btn.dataset.target, btn.textContent.trim()])
@@ -1058,6 +1172,15 @@
         set.classList.toggle('hidden', !isMatch);
       });
     }
+
+    heroCta?.addEventListener('click', () => {
+      state.nav = 'home';
+      render();
+      focusPanel();
+      if (isMobileView()) {
+        closeMobileNav();
+      }
+    });
 
     navButtons.forEach((button) => {
       button.addEventListener('click', () => {
