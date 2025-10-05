@@ -9,7 +9,12 @@
       href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
       rel="stylesheet"
     />
-    <title>FSTS Driver – Module Vitrine</title>
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://live.staticflickr.com/65535/54834355584_ba01f82e26.jpg"
+    />
+    <title>Drive FSTS</title>
     <style>
 :root {
   --primary: #1f2a44;
@@ -61,9 +66,16 @@ header {
 .brand {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.6rem;
   text-decoration: none;
   color: inherit;
+}
+
+.brand-logo {
+  width: clamp(40px, 8vw, 56px);
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
 }
 
 .brand-text {
@@ -762,9 +774,16 @@ footer {
 .footer-brand {
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.6rem;
   text-decoration: none;
   color: inherit;
+}
+
+.footer-logo {
+  width: clamp(42px, 9vw, 56px);
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.25);
 }
 
 .footer-text {
@@ -991,8 +1010,14 @@ footer {
   <body>
     <header>
       <div class="brand">
+        <img
+          src="https://live.staticflickr.com/65535/54834355584_ba01f82e26.jpg"
+          alt="Drive FSTS logo"
+          class="brand-logo"
+          loading="lazy"
+        />
         <div class="brand-text">
-          <strong>FSTS Driver</strong>
+          <strong>Drive FSTS</strong>
           <span>Modules &amp; Resources Library</span>
         </div>
       </div>
@@ -1041,7 +1066,7 @@ footer {
         <div class="hero">
           <div class="hero-inner">
             <div class="hero-copy">
-              <h1 class="hero-title">Bienvenue sur FSTS Driver</h1>
+              <h1 class="hero-title">Bienvenue sur Drive FSTS</h1>
               <p class="hero-text">
                 La plateforme qui regroupe l’ensemble des cours, TDs, TPs et
                 ressources pédagogiques de la Faculté des Sciences et Techniques
@@ -1649,8 +1674,14 @@ footer {
       <div class="footer-shell">
         <div class="footer-top">
           <div class="footer-brand">
+            <img
+              src="https://live.staticflickr.com/65535/54834355584_ba01f82e26.jpg"
+              alt="Drive FSTS logo"
+              class="footer-logo"
+              loading="lazy"
+            />
             <div class="footer-text">
-              <span>FSTS Driver</span>
+              <span>Drive FSTS</span>
               <span>Modules &amp; Resources Library</span>
             </div>
           </div>
