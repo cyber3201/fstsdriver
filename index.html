@@ -416,6 +416,15 @@ nav.nav-wrapper {
   }
 }
 
+@media (min-width: 1200px) {
+  .home-catalog-grid,
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    max-width: 1180px;
+    padding-inline: 0;
+  }
+}
+
 .hero-media {
   position: relative;
   display: grid;
