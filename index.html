@@ -369,6 +369,7 @@ nav.nav-wrapper {
   margin: 0;
   color: rgba(255, 255, 255, 0.82);
   font-size: 0.95rem;
+  text-align: justify;
 }
 
 .catalog-card span {
@@ -679,6 +680,7 @@ h4 {
   margin: 0;
   color: var(--muted);
   font-size: 0.9rem;
+  text-align: justify;
 }
 
 .hidden {
@@ -902,6 +904,37 @@ footer {
   }
 }
 
+@media (max-width: 768px) {
+  .home-catalog-inner,
+  .home-body,
+  .catalog-shell {
+    width: min(100%, 96vw);
+  }
+
+  .home-catalog-grid,
+  .catalog-grid,
+  .info-grid,
+  .group-grid,
+  .filiere-grid,
+  .modules-grid {
+    justify-items: center;
+  }
+
+  .home-catalog-grid > *,
+  .catalog-grid > *,
+  .info-grid > *,
+  .group-grid > *,
+  .filiere-grid > *,
+  .modules-grid > * {
+    width: min(100%, 360px);
+    justify-self: center;
+  }
+
+  .catalog-text {
+    max-width: 100%;
+  }
+}
+
 @media (max-width: 900px) {
   header {
     padding: 0.7rem 1.15rem;
@@ -1077,7 +1110,7 @@ footer {
   }
 
   .footer-disclaimer p {
-    text-align: center;
+    text-align: justify;
   }
 
   .footer-bottom {

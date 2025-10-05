@@ -240,6 +240,16 @@
         border: 1px solid var(--card-border);
       }
 
+      @media (max-width: 768px) {
+        main {
+          padding: clamp(2rem, 7vw, 3rem) 1.25rem clamp(3rem, 8vw, 3.75rem);
+        }
+
+        .page-shell {
+          width: min(100%, 96vw);
+        }
+      }
+
       h1 {
         margin: 0;
         font-size: clamp(2rem, 4vw, 2.8rem);
@@ -533,7 +543,7 @@
         }
 
         .footer-disclaimer p {
-          text-align: center;
+          text-align: justify;
         }
 
         .footer-bottom {
