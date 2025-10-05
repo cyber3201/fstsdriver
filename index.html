@@ -393,7 +393,11 @@ nav.nav-wrapper {
 
 @media (min-width: 1024px) {
   .home-catalog-inner {
-    width: min(1240px, 88vw);
+    width: min(1240px, 94vw);
+  }
+
+  .catalog-shell {
+    width: min(1240px, 94vw);
   }
 
   .home-catalog-grid,
@@ -417,11 +421,23 @@ nav.nav-wrapper {
 }
 
 @media (min-width: 1200px) {
+  .home-catalog-inner,
+  .catalog-shell {
+    width: min(1240px, max(1136px, 96vw));
+  }
+
   .home-catalog-grid,
   .catalog-grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    max-width: 1180px;
+    grid-template-columns: repeat(4, minmax(260px, 260px));
+    column-gap: 2.5rem;
+    width: max-content;
+    margin-inline: auto;
     padding-inline: 0;
+  }
+
+  .home-catalog-grid > *,
+  .catalog-grid > * {
+    width: 260px;
   }
 }
 
