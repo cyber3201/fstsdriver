@@ -1009,7 +1009,7 @@ footer {
   </head>
   <body>
     <header>
-      <div class="brand">
+      <a class="brand" href="#home" id="brand-link">
         <img
           src="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
           alt="Drive FSTS logo"
@@ -1020,7 +1020,7 @@ footer {
           <strong>Drive FSTS</strong>
           <span>Modules &amp; Resources Library</span>
         </div>
-      </div>
+      </a>
       <button
         type="button"
         class="nav-toggle"
@@ -1046,16 +1046,16 @@ footer {
             Accueil
           </button>
           <button type="button" class="nav-btn" data-target="tronc-commun">
-            Tronc commun
+            Accueil
           </button>
           <button type="button" class="nav-btn" data-target="licence">
-            Licence
+            Mission
           </button>
           <button type="button" class="nav-btn" data-target="master">
-            Master
+            Vision
           </button>
           <button type="button" class="nav-btn" data-target="ingenieur">
-            Cycle d’ingénieur
+            Contactez-Nous
           </button>
         </div>
       </nav>
@@ -1673,7 +1673,7 @@ footer {
     <footer>
       <div class="footer-shell">
         <div class="footer-top">
-          <div class="footer-brand">
+          <a class="footer-brand" href="#home">
             <img
               src="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
               alt="Drive FSTS logo"
@@ -1682,9 +1682,9 @@ footer {
             />
             <div class="footer-text">
               <span>Drive FSTS</span>
-              <span>Modules &amp; Resources Library</span>
+              <span>Bibliothèque Globale des Ressources</span>
             </div>
-          </div>
+          </a>
           <nav class="footer-links" aria-label="Liens secondaires">
             <a href="#home">Accueil</a>
             <a href="#catalog">Filières</a>
@@ -1706,6 +1706,7 @@ const navToggle = document.getElementById("nav-toggle");
 const navToggleLabel = navToggle
   ? navToggle.querySelector(".sr-only")
   : null;
+const brandLink = document.getElementById("brand-link");
 const homeSection = document.getElementById("home");
 const catalogSection = document.getElementById("catalog");
 const catalogHomeLink = document.getElementById("catalog-home");
@@ -1869,6 +1870,15 @@ if (heroCta) {
     state.filiereLabel = "";
     render();
     scrollToSection(catalogSection);
+    if (isMobileView()) {
+      closeMobileNav();
+    }
+  });
+}
+
+if (brandLink) {
+  brandLink.addEventListener("click", () => {
+    resetToHome();
     if (isMobileView()) {
       closeMobileNav();
     }
