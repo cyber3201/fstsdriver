@@ -381,6 +381,31 @@ nav.nav-wrapper {
   color: rgba(255, 255, 255, 0.9);
 }
 
+@media (min-width: 1024px) {
+  .home-catalog-inner {
+    width: min(1240px, 88vw);
+  }
+
+  .catalog-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+
+  .catalog-card {
+    padding: 2.75rem 2.35rem;
+    border-radius: 1.5rem;
+  }
+
+  .catalog-card h3 {
+    font-size: 1.55rem;
+  }
+
+  .catalog-card p,
+  .catalog-card span {
+    font-size: 1.05rem;
+  }
+}
+
 .hero-media {
   position: relative;
   display: grid;
