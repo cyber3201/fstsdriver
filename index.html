@@ -482,7 +482,8 @@ nav.nav-wrapper {
   justify-content: flex-end;
 }
 
-.nav-list button {
+.nav-list button,
+.nav-list .nav-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -497,17 +498,21 @@ nav.nav-wrapper {
   box-shadow: 0 10px 20px rgba(31, 42, 68, 0.08);
   transition: background 0.2s ease, border-color 0.2s ease,
     box-shadow 0.2s ease;
+  text-decoration: none;
 }
 
 .nav-list button:hover,
-.nav-list button:focus {
+.nav-list button:focus,
+.nav-list .nav-link:hover,
+.nav-list .nav-link:focus {
   background: var(--accent-soft);
   border-color: rgba(31, 42, 68, 0.28);
   outline: none;
   box-shadow: 0 14px 28px rgba(31, 42, 68, 0.12);
 }
 
-.nav-list button.active {
+.nav-list button.active,
+.nav-list .nav-link.active {
   background: var(--accent);
   color: #1a1a1a;
   border-color: transparent;
@@ -947,7 +952,8 @@ footer {
     gap: 0.65rem;
   }
 
-  .nav-list button {
+  .nav-list button,
+  .nav-list .nav-link {
     width: 100%;
     justify-content: flex-start;
     font-size: 1rem;
@@ -957,11 +963,14 @@ footer {
   }
 
   .nav-list button:hover,
-  .nav-list button:focus {
+  .nav-list button:focus,
+  .nav-list .nav-link:hover,
+  .nav-list .nav-link:focus {
     box-shadow: none;
   }
 
-  .nav-list button.active {
+  .nav-list button.active,
+  .nav-list .nav-link.active {
     box-shadow: none;
   }
 
@@ -1045,18 +1054,11 @@ footer {
           >
             Accueil
           </button>
-          <button type="button" class="nav-btn" data-target="tronc-commun">
-            Accueil
-          </button>
-          <button type="button" class="nav-btn" data-target="licence">
-            Mission
-          </button>
-          <button type="button" class="nav-btn" data-target="master">
-            Vision
-          </button>
-          <button type="button" class="nav-btn" data-target="ingenieur">
-            Contactez-Nous
-          </button>
+          <a class="nav-link" href="why.html">Mission</a>
+          <a class="nav-link" href="team.html">Vision</a>
+          <a class="nav-link" href="mailto:zakariagbibar4@gmail.com"
+            >Contactez-Nous</a
+          >
         </div>
       </nav>
     </header>
@@ -1701,6 +1703,7 @@ footer {
 
     <script>
 const navButtons = Array.from(document.querySelectorAll(".nav-btn"));
+const navLinks = Array.from(document.querySelectorAll(".nav-link"));
 const navWrapper = document.getElementById("primary-nav");
 const navToggle = document.getElementById("nav-toggle");
 const navToggleLabel = navToggle
@@ -1725,9 +1728,13 @@ const breadcrumbGroupBtn = document.getElementById("breadcrumb-group");
 const breadcrumbFiliere = document.getElementById("breadcrumb-filiere");
 const heroCta = document.getElementById("hero-cta");
 
-const navLabels = Object.fromEntries(
-  navButtons.map((btn) => [btn.dataset.target, btn.textContent.trim()])
-);
+const navLabels = {
+  home: "Accueil",
+  "tronc-commun": "Tronc commun",
+  licence: "Licence",
+  master: "Master",
+  ingenieur: "Cycle d’ingénieur",
+};
 
 const state = {
   view: "home",
@@ -1920,6 +1927,14 @@ navButtons.forEach((button) => {
       render();
       scrollToSection(groupPanel);
     }
+    if (isMobileView()) {
+      closeMobileNav();
+    }
+  });
+});
+
+navLinks.forEach((link) => {
+  link.addEventListener("click", () => {
     if (isMobileView()) {
       closeMobileNav();
     }
