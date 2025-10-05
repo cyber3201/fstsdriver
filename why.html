@@ -250,6 +250,19 @@
         text-align: justify;
       }
 
+      .text-divider {
+        width: 90px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        margin: 0.75rem auto;
+        border-radius: 999px;
+      }
+
+      .rtl {
+        direction: rtl;
+        text-align: justify;
+      }
+
       a {
         color: var(--accent);
         font-weight: 600;
@@ -475,20 +488,29 @@
 
     <main>
       <article class="page-shell">
-        <h1>Pourquoi FSTS Driver existe&nbsp;?</h1>
+        <h1>Mission</h1>
         <p>
-          FSTS Driver est né d’un constat simple&nbsp;: les ressources pédagogiques
-          de la faculté étaient éparpillées entre plusieurs comptes Google Drive,
-          groupes privés et clés USB partagées entre promotions. Pour gagner du
-          temps et offrir un accès équitable à tous les étudiants, nous avons
-          regroupé dans un même espace les cours, TDs, TPs, examens et annales de
-          l’ensemble des filières.
+          Nous avons créé FSTS Driver afin de faciliter l’accès aux ressources
+          pédagogiques pour tous les étudiants de la Faculté des Sciences et
+          Techniques de Settat. Notre objectif est de centraliser, dans une seule
+          plateforme simple et intuitive, l’ensemble des cours, TDs, TPs et
+          documents utiles à chaque filière. Grâce à FSTS Driver, les étudiants
+          n’ont plus besoin de chercher dans les groupes ou de demander sans cesse
+          les liens Google Drive. Tout est désormais accessible facilement, à tout
+          moment, en un seul endroit. Il suffit simplement de taper
+          <strong>drivefsts.org</strong> pour trouver tout ce dont vous avez
+          besoin tout au long de votre parcours académique à la FSTS Settat.
         </p>
-        <p>
-          Le site permet ainsi de retrouver en quelques clics la bonne ressource,
-          dans sa dernière version, et de la partager facilement avec ses
-          camarades. Notre ambition est de maintenir une bibliothèque vivante,
-          enrichie par la communauté et mise à jour au fil des semestres.
+        <div class="text-divider" aria-hidden="true"></div>
+        <p class="rtl">
+          قمنا بإنشاء هذه المنصة بهدف تسهيل وصول جميع طلبة كلية العلوم والتقنيات
+          بسطات إلى الموارد البيداغوجية. يتمثل هدفنا في جمع كل الدروس، والأعمال
+          الموجهة، والأعمال التطبيقية، والوثائق المفيدة لكل مسلك، في مكان واحد
+          سهل وبسيط الاستخدام. بفضل هذه المنصة، لم يعد الطالب بحاجة إلى البحث في
+          المجموعات أو سؤال المندوبين عن الروابط الخاصة بالمواد الدراسية. كل شيء
+          متاح الآن في مكان واحد، بشكل منظم وسهل الوصول إليه في أي وقت. يكفي فقط
+          كتابة عنوان الموقع <strong>drivefsts.org</strong> لتجدوا كل ما تحتاجونه
+          طيلة مساركم الأكاديمي بكلية العلوم والتقنيات بسطات.
         </p>
         <div class="actions">
           <a class="btn" href="index.html">Retourner à l’accueil</a>
