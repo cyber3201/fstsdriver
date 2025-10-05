@@ -3,6 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+    rel="stylesheet"
+  />
   <title>FSTS Driver – Module Vitrine</title>
   <style>
     :root {
@@ -23,7 +29,7 @@
 
     body {
       margin: 0;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Readex Pro", "Rubik", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       background: var(--background);
       color: var(--text);
       min-height: 100vh;
@@ -159,6 +165,7 @@
       font-size: clamp(2rem, 4.2vw, 3rem);
       line-height: 1.1;
       margin: 0;
+      color: #ffffff;
     }
 
     .hero-title span {
@@ -657,14 +664,17 @@
       }
 
       .hero-image-frame {
-        width: min(280px, 80%);
+        width: min(320px, 82%);
       }
 
       .hero-note {
-        position: static;
-        margin-top: 1rem;
-        align-self: center;
+        left: 50%;
+        right: auto;
+        bottom: 8%;
+        transform: translateX(-50%);
         text-align: center;
+        padding: 0.85rem 1.1rem;
+        max-width: min(220px, 75%);
       }
 
       .nav-toggle {
