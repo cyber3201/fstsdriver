@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FSTS Driver – Ressources pédagogiques</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="brand" id="top">
+        <span class="brand-emblem" aria-hidden="true">FD</span>
+        <div class="brand-copy">
+          <span class="brand-title">FSTS Driver</span>
+          <span class="brand-subtitle">Modules &amp; ressources</span>
+        </div>
+      </div>
+      <button
+        class="nav-toggle"
+        type="button"
+        id="nav-toggle"
+        aria-controls="primary-nav"
+        aria-expanded="false"
+      >
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="sr-only" id="nav-toggle-label">Ouvrir le menu</span>
+      </button>
+      <nav id="primary-nav" class="primary-nav" aria-label="Navigation principale">
+        <ul class="nav-list">
+          <li><button type="button" class="nav-btn active" data-target="home">Accueil</button></li>
+          <li><button type="button" class="nav-btn" data-target="tronc-commun">Tronc commun</button></li>
+          <li><button type="button" class="nav-btn" data-target="licence">Licence</button></li>
+          <li><button type="button" class="nav-btn" data-target="master">Master</button></li>
+          <li>
+            <button type="button" class="nav-btn" data-target="ingenieur">Cycle d’ingénieur</button>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="hero-kicker">Bienvenue sur</p>
+            <h1 class="hero-title" id="hero-title">FSTS Driver</h1>
+            <p class="hero-text">
+              La plateforme officielle qui centralise tous les modules, cours et ressources pédagogiques de la Faculté des
+              Sciences et Techniques de Settat. Retrouvez les liens Google Drive classés par groupe, filière et type de
+              document.
+            </p>
+            <ul class="hero-highlights">
+              <li>📄 Cours PDF, TD &amp; TP</li>
+              <li>🎥 Vidéos et présentations</li>
+              <li>📁 Dossiers partagés par filière</li>
+            </ul>
+            <div class="hero-actions">
+              <button type="button" class="btn btn-primary" id="hero-cta">Explorer les filières</button>
+              <a class="btn btn-link" href="#contact">Contact →</a>
+            </div>
+          </div>
+          <div class="hero-media">
+            <figure class="hero-frame">
+              <img
+                src="https://live.staticflickr.com/65535/53187592601_ea80be9c2f_b.jpg"
+                alt="Campus de la Faculté des Sciences et Techniques de Settat"
+                loading="lazy"
+              />
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="intro" aria-label="Présentation du projet">
+        <div class="intro-grid">
+          <article class="info-card">
+            <h2>WHY THIS WEBSITE?</h2>
+            <p>
+              Centraliser les supports de cours pour toutes les filières de la FSTS. Chaque carte de module vous mène
+              directement aux ressources partagées sur Google Drive : PDF, diapositives, vidéos et dossiers.
+            </p>
+          </article>
+          <article class="info-card">
+            <h2>BUILT BY WHO?</h2>
+            <p>
+              Une initiative d’étudiants et d’anciens souhaitant partager leurs ressources avec la communauté. Ensemble, nous
+              construisons une base de connaissances commune.
+            </p>
+          </article>
+          <article class="info-card" id="contact">
+            <h2>CONTACT ME</h2>
+            <p>
+              Une suggestion, un fichier manquant ou une mise à jour ? Écrivez à
+              <a href="mailto:contact@fstsdriver.example">contact@fstsdriver.example</a> ou partagez vos ressources via
+              Google Drive.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="explorer" id="explorer" aria-live="polite">
+        <header class="explorer-header">
+          <div>
+            <p class="eyebrow">Navigation</p>
+            <h2>Choisissez un groupe, une filière, puis votre module</h2>
+          </div>
+          <nav class="breadcrumb" aria-label="Fil d’Ariane" id="breadcrumb">
+            <button type="button" id="breadcrumb-home">Accueil</button>
+            <span aria-hidden="true" id="breadcrumb-sep" class="hidden">›</span>
+            <button type="button" id="breadcrumb-group" class="hidden"></button>
+            <span id="breadcrumb-filiere" class="hidden"></span>
+          </nav>
+        </header>
+
+        <div class="panels">
+          <div id="group-view" class="tile-grid" role="list"></div>
+          <div id="filiere-view" class="tile-grid hidden" role="list"></div>
+          <div id="modules-view" class="modules-grid hidden" role="list"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <span class="footer-logo" aria-hidden="true">FD</span>
+        <div class="footer-copy">
+          <span>FSTS Driver</span>
+          <span>&copy; <span id="year"></span> – Ressources pédagogiques partagées</span>
+        </div>
+      </div>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
