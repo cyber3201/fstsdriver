@@ -769,7 +769,9 @@ footer {
 
 .footer-shell {
   margin: 0 auto;
-  width: min(1120px, 92vw);
+  width: 100%;
+  max-width: 1120px;
+  padding-inline: clamp(1.25rem, 5vw, 2rem);
   display: flex;
   flex-direction: column;
   gap: 2rem;
