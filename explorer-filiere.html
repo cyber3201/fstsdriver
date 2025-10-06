@@ -303,6 +303,10 @@
         transition: transform 0.25s ease, box-shadow 0.25s ease;
       }
 
+      .catalog-card:visited {
+        text-decoration: none;
+      }
+
       .catalog-card::before {
         content: "";
         position: absolute;
@@ -352,6 +356,7 @@
         transform: translateY(-6px);
         box-shadow: 0 32px 60px rgba(9, 16, 32, 0.4);
         outline: none;
+        text-decoration: none;
       }
 
       .catalog-card:hover::before,
