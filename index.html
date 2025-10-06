@@ -573,19 +573,18 @@ nav.nav-wrapper {
   width: clamp(120px, 22vw, 180px);
   aspect-ratio: 1;
   border-radius: 26px;
-  display: grid;
-  place-items: center;
-  font-size: clamp(2.5rem, 6vw, 3.5rem);
-  font-weight: 600;
-  color: inherit;
+  overflow: hidden;
   background: rgba(255, 255, 255, 0.15);
   backdrop-filter: blur(6px);
   position: relative;
   z-index: 1;
 }
 
-.mission-vision-card .card-visual span {
-  filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.25));
+.mission-vision-card .card-visual img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
 .mission-vision-card .card-content {
@@ -1494,7 +1493,11 @@ footer {
         <section class="mission-vision" aria-label="Mission et vision de FSTS DRIVE">
           <article class="mission-vision-card mission">
             <div class="card-visual" aria-hidden="true">
-              <span>🎯</span>
+              <img
+                src="https://live.staticflickr.com/65535/54836086107_79cff168d2.jpg"
+                alt=""
+                loading="lazy"
+              />
             </div>
             <div class="card-content">
               <h2>Notre Mission</h2>
@@ -1510,7 +1513,11 @@ footer {
           </article>
           <article class="mission-vision-card vision">
             <div class="card-visual" aria-hidden="true">
-              <span>🚀</span>
+              <img
+                src="https://live.staticflickr.com/65535/54836954016_8cdcbdd4d1.jpg"
+                alt=""
+                loading="lazy"
+              />
             </div>
             <div class="card-content">
               <h2>Notre Vision</h2>
