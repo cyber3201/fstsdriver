@@ -1217,6 +1217,9 @@ footer {
           >
             Accueil
           </button>
+          <a class="nav-link" href="explorer-filiere.html">
+            Explorer les Filières
+          </a>
           <a class="nav-link" href="why.html">Mission</a>
           <a class="nav-link" href="team.html">Vision</a>
           <a class="nav-link" href="mailto:zakariagbibar4@gmail.com"
@@ -1245,7 +1248,6 @@ footer {
                   type="button"
                   class="hero-cta"
                   id="hero-cta"
-                  aria-controls="catalog"
                 >
                   Explorer les filières
                 </button>
@@ -1302,34 +1304,43 @@ footer {
               <div class="catalog-crumbs">
                 <a href="#" id="catalog-home">Accueil</a>
                 <span aria-hidden="true">/</span>
-                <span>Nos Filières</span>
+                <span>Explorer les Filières</span>
               </div>
-              <h2 id="catalog-title" class="catalog-title">Nos Filières</h2>
+              <h2 id="catalog-title" class="catalog-title">
+                Explorer les Filières
+              </h2>
               <p class="catalog-text">
-                Choisissez une filière pour consulter les modules et ressources
-                partagés avec la communauté FSTS.
+                Choisissez une filière pour consulter les modules.
               </p>
             </div>
             <div class="catalog-grid" role="list">
               <button type="button" class="catalog-card" data-group="tronc-commun">
                 <h3>Tronc commun</h3>
-                <p>Analyse, programmation et bases scientifiques.</p>
-                <span>Voir les ressources →</span>
+                <p>Accédez aux différentes spécialités du Tronc Commun.</p>
+                <span>Voir les spécialités →</span>
               </button>
               <button type="button" class="catalog-card" data-group="licence">
                 <h3>Licence Sciences et Techniques</h3>
-                <p>Filières professionnelles et fondamentales.</p>
-                <span>Voir les ressources →</span>
+                <p>
+                  Accédez aux différentes spécialités des Licences Sciences et
+                  Techniques.
+                </p>
+                <span>Voir les spécialités →</span>
               </button>
               <button type="button" class="catalog-card" data-group="master">
                 <h3>Master Sciences et Techniques</h3>
-                <p>Spécialisations avancées et projets.</p>
-                <span>Voir les ressources →</span>
+                <p>
+                  Accédez aux différentes spécialités des Masters Sciences et
+                  Techniques.
+                </p>
+                <span>Voir les spécialités →</span>
               </button>
               <button type="button" class="catalog-card" data-group="ingenieur">
                 <h3>Cycle d’ingénieur</h3>
-                <p>Formation d’ingénieur et expertise technique.</p>
-                <span>Voir les ressources →</span>
+                <p>
+                  Accédez aux différentes spécialités du Cycle d’ingénieur.
+                </p>
+                <span>Voir les spécialités →</span>
               </button>
             </div>
           </div>
@@ -1814,9 +1825,9 @@ footer {
           </a>
           <nav class="footer-nav" aria-label="Liens secondaires">
             <a href="#home">Accueil</a>
+            <a href="explorer-filiere.html">Explorer les Filières</a>
             <a href="why.html">Mission</a>
             <a href="team.html">Vision</a>
-            <a href="#group-panel">Explorer les filières</a>
           </nav>
         </div>
         <section class="footer-disclaimer" aria-label="Disclaimer">
@@ -2006,17 +2017,44 @@ function resetToHome() {
   render();
 }
 
-if (heroCta) {
-  heroCta.addEventListener("click", () => {
-    state.view = "catalog";
-    state.group = null;
+function applyQueryParams() {
+  const params = new URLSearchParams(window.location.search);
+  const groupParam = params.get("group");
+  const filiereParam = params.get("filiere");
+  let applied = false;
+
+  if (groupParam && Object.prototype.hasOwnProperty.call(navLabels, groupParam)) {
+    state.group = groupParam;
     state.filiere = null;
     state.filiereLabel = "";
-    render();
-    scrollToSection(catalogSection);
-    if (isMobileView()) {
-      closeMobileNav();
+    state.view = "filiere";
+    applied = true;
+
+    if (filiereParam) {
+      const matchingTile = filiereTiles.find(
+        (tile) =>
+          tile.dataset.group === groupParam && tile.dataset.filiere === filiereParam
+      );
+
+      if (matchingTile) {
+        const titleEl = matchingTile.querySelector("h3");
+        state.view = "modules";
+        state.filiere = filiereParam;
+        state.filiereLabel = titleEl ? titleEl.textContent.trim() : "";
+      }
     }
+
+    if (typeof history !== "undefined" && history.replaceState) {
+      history.replaceState(null, "", window.location.pathname);
+    }
+  }
+
+  return applied;
+}
+
+if (heroCta) {
+  heroCta.addEventListener("click", () => {
+    window.location.href = "explorer-filiere.html";
   });
 }
 
@@ -2144,7 +2182,11 @@ const footerYear = document.getElementById("footer-year");
 if (footerYear) {
   footerYear.textContent = new Date().getFullYear();
 }
+const queryApplied = applyQueryParams();
 render();
+if (queryApplied && (state.view === "filiere" || state.view === "modules")) {
+  scrollToSection(groupPanel);
+}
 
 
     </script>
