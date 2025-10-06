@@ -542,124 +542,162 @@ nav.nav-wrapper {
 }
 
 .mission-vision {
-  width: min(1120px, 92vw);
-  margin: 0 auto clamp(3rem, 7vw, 4rem);
-  display: grid;
-  gap: clamp(2rem, 5vw, 3rem);
+  width: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.mission-vision-card {
+.mission-vision-pane {
   position: relative;
   display: flex;
   align-items: center;
-  gap: clamp(1.75rem, 5vw, 3.5rem);
-  padding: clamp(2.5rem, 6vw, 3.75rem);
-  border-radius: 28px;
+  justify-content: flex-start;
+  gap: clamp(1.5rem, 4vw, 2.5rem);
+  min-height: 100svh;
+  padding: clamp(3rem, 7vw, 5rem) clamp(6vw, 10vw, 8rem);
   overflow: hidden;
-  box-shadow: 0 32px 70px rgba(12, 23, 45, 0.18);
 }
 
-.mission-vision-card::after {
+.mission-vision-pane::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 0.18), transparent 58%),
-    radial-gradient(circle at 85% 80%, rgba(255, 255, 255, 0.12), transparent 60%);
+  opacity: 0.9;
   pointer-events: none;
 }
 
-.mission-vision-card .card-visual {
-  flex: 0 0 auto;
-  width: clamp(120px, 22vw, 180px);
-  aspect-ratio: 1;
-  border-radius: 26px;
-  overflow: hidden;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(6px);
-  position: relative;
-  z-index: 1;
+.mission-vision-pane::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: min(45%, 520px);
+  opacity: 0.9;
+  pointer-events: none;
 }
 
-.mission-vision-card .card-visual img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-.mission-vision-card .card-content {
+.mission-vision-inner {
   position: relative;
   z-index: 1;
+  max-width: 560px;
   display: grid;
-  gap: clamp(0.75rem, 2vw, 1.25rem);
-  color: inherit;
-  text-align: left;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
 }
 
-.mission-vision-card h2 {
+.mission-vision-inner h2 {
   margin: 0;
-  font-size: clamp(2rem, 4vw, 2.8rem);
-  font-weight: 700;
+  font-size: clamp(2.2rem, 4vw, 3rem);
 }
 
-.mission-vision-card p {
+.mission-vision-inner p {
   margin: 0;
   text-align: left;
-  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.7;
 }
 
-.mission-vision-card .card-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-
-.mission-vision-card .card-actions a {
+.mission-vision-cta {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.75rem;
+  padding: 0.85rem 1.9rem;
   border-radius: 999px;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
-  background: #ffffff;
-  color: #0f1e3a;
-  transition: transform 0.18s ease, box-shadow 0.18s ease;
-  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.22);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  z-index: 1;
 }
 
-.mission-vision-card .card-actions a:hover,
-.mission-vision-card .card-actions a:focus {
+.mission-vision-cta:hover,
+.mission-vision-cta:focus {
   transform: translateY(-2px);
-  box-shadow: 0 24px 52px rgba(15, 23, 42, 0.28);
+  box-shadow: 0 18px 36px rgba(0, 0, 0, 0.22);
   outline: none;
 }
 
-.mission-vision-card.mission {
-  background: linear-gradient(135deg, #071d40 0%, #0e3879 60%, #164d9c 100%);
-  color: #ffffff;
+.mission-vision-pane.mission {
+  color: #ffe68a;
 }
 
-.mission-vision-card.mission .card-actions a {
-  box-shadow: 0 18px 36px rgba(13, 41, 90, 0.32);
+.mission-vision-pane.mission::before {
+  background: linear-gradient(135deg, #031936 0%, #0b3366 55%, #134a99 100%);
 }
 
-.mission-vision-card.vision {
-  background: linear-gradient(135deg, #f0a500 0%, #f6c441 45%, #f8d46a 100%);
-  color: #1f2a44;
+.mission-vision-pane.mission::after {
+  background-image: url("https://live.staticflickr.com/65535/54836086107_79cff168d2.jpg");
+  opacity: 0.6;
 }
 
-.mission-vision-card.vision .card-visual {
-  background: rgba(255, 255, 255, 0.25);
+.mission-vision-pane.mission h2 {
+  color: #ffec9f;
 }
 
-.mission-vision-card.vision .card-actions a {
-  color: #1f2a44;
-  box-shadow: 0 18px 32px rgba(240, 165, 0, 0.28);
+.mission-vision-pane.mission p {
+  color: rgba(255, 234, 173, 0.95);
 }
 
-.mission-vision-card.vision p {
-  color: rgba(31, 42, 68, 0.9);
+.mission-vision-pane.mission .mission-vision-cta {
+  background: #ffcc4d;
+  color: #0b2f5f;
+  box-shadow: 0 18px 36px rgba(12, 45, 99, 0.32);
+}
+
+.mission-vision-pane.vision {
+  color: #152a4c;
+}
+
+.mission-vision-pane.vision::before {
+  background: linear-gradient(135deg, #ffd452 0%, #ffe17d 50%, #fff0b5 100%);
+}
+
+.mission-vision-pane.vision::after {
+  background-image: url("https://live.staticflickr.com/65535/54836954016_8cdcbdd4d1.jpg");
+  opacity: 0.75;
+}
+
+.mission-vision-pane.vision h2 {
+  color: #0f2346;
+}
+
+.mission-vision-pane.vision p {
+  color: rgba(21, 42, 76, 0.9);
+}
+
+.mission-vision-pane.vision .mission-vision-cta {
+  background: #0f2346;
+  color: #ffe17d;
+  box-shadow: 0 18px 36px rgba(15, 35, 70, 0.28);
+}
+
+@media (max-width: 900px) {
+  .mission-vision-pane {
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    padding: clamp(2.75rem, 10vw, 4rem) clamp(2rem, 6vw, 3rem);
+  }
+
+  .mission-vision-pane::after {
+    background-size: min(70%, 440px);
+    background-position: center 30%;
+    opacity: 0.45;
+  }
+
+  .mission-vision-inner {
+    max-width: none;
+    text-align: center;
+    align-items: center;
+  }
+
+  .mission-vision-inner p {
+    text-align: center;
+  }
+
+  .mission-vision-cta {
+    margin: 0 auto;
+  }
 }
 
 .nav-list {
@@ -1091,8 +1129,7 @@ footer {
 
 @media (max-width: 768px) {
   .home-catalog-inner,
-  .catalog-shell,
-  .mission-vision {
+  .catalog-shell {
     width: min(100%, 96vw);
   }
 
@@ -1491,44 +1528,26 @@ footer {
         </section>
 
         <section class="mission-vision" aria-label="Mission et vision de FSTS DRIVE">
-          <article class="mission-vision-card mission">
-            <div class="card-visual" aria-hidden="true">
-              <img
-                src="https://live.staticflickr.com/65535/54836086107_79cff168d2.jpg"
-                alt=""
-                loading="lazy"
-              />
-            </div>
-            <div class="card-content">
+          <article class="mission-vision-pane mission">
+            <div class="mission-vision-inner">
               <h2>Notre Mission</h2>
               <p>
                 Faciliter l’accès immédiat à toutes les ressources pédagogiques de la FSTS
                 Settat dans un espace unique, intuitif et disponible à tout moment pour la
                 communauté étudiante.
               </p>
-              <div class="card-actions">
-                <a href="mission.html">savoir plus</a>
-              </div>
+              <a class="mission-vision-cta" href="mission.html">savoir plus</a>
             </div>
           </article>
-          <article class="mission-vision-card vision">
-            <div class="card-visual" aria-hidden="true">
-              <img
-                src="https://live.staticflickr.com/65535/54836954016_8cdcbdd4d1.jpg"
-                alt=""
-                loading="lazy"
-              />
-            </div>
-            <div class="card-content">
+          <article class="mission-vision-pane vision">
+            <div class="mission-vision-inner">
               <h2>Notre Vision</h2>
               <p>
                 Construire une bibliothèque numérique durable où chaque étudiant peut
                 partager, enrichir et faire évoluer les cours, TDs et projets pour les
                 générations futures.
               </p>
-              <div class="card-actions">
-                <a href="vision.html">savoir plus</a>
-              </div>
+              <a class="mission-vision-cta" href="vision.html">savoir plus</a>
             </div>
           </article>
         </section>
