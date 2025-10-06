@@ -263,16 +263,17 @@
         text-align: justify;
       }
 
-      ul {
-        margin: 0;
-        padding-left: 1.25rem;
-        display: grid;
-        gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.9);
+      .text-divider {
+        width: 90px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, #ffd15c, transparent);
+        margin: 0.75rem auto;
+        border-radius: 999px;
       }
 
-      strong {
-        color: #ffffff;
+      .rtl {
+        direction: rtl;
+        text-align: justify;
       }
 
       a {
@@ -550,33 +551,26 @@
 
     <main>
       <article class="page-shell">
-        <h1>Qui maintient FSTS Driver&nbsp;?</h1>
+        <h1>Vision</h1>
         <p>
-          Le site est animé par un petit collectif d’étudiants bénévoles de
-          différentes filières. Chacun contribue selon ses forces&nbsp;: collecte
-          des documents, structuration des dossiers, vérification des accès ou
-          développement de nouvelles fonctionnalités.
+          Nous voulons faire de FSTS Driver le réflexe quotidien des étudiants de la
+          FSTS Settat&nbsp;: une plateforme claire, rapide et toujours à jour, qui
+          favorise l’entraide, la motivation et la progression continue. À terme,
+          nous rêvons d’une communauté où chaque promo enrichit la suivante, où les
+          bonnes ressources circulent librement, et où chacun se sent accompagné,
+          organisé et confiant tout au long de son parcours.
         </p>
-        <p>Notre équipe s’articule autour de trois pôles&nbsp;:</p>
-        <ul>
-          <li><strong>Coordination :</strong> suivi des demandes et du planning.</li>
-          <li>
-            <strong>Contenu :</strong> veille sur les ressources, organisation des
-            drives et métadonnées.
-          </li>
-          <li>
-            <strong>Technique :</strong> maintenance du site, amélioration de
-            l’expérience utilisateur et support.
-          </li>
-        </ul>
-        <p>
-          Nous sommes toujours ouverts aux nouvelles contributions. Si vous
-          souhaitez rejoindre l’aventure ou partager vos propres cours, écrivez-nous
-          et nous vous guiderons pour intégrer vos ressources à la plateforme.
+        <div class="text-divider" aria-hidden="true"></div>
+        <p class="rtl">
+          نطمح في هذه المنصة أن تصبح الخيار اليومي لطلبة كلية العلوم والتقنيات
+          بسطات: منصة واضحة وسريعة ومحدّثة باستمرار، تدعم روح التعاون والتحفيز
+          والتقدّم خطوة بخطوة. وبمرور الوقت، نريد مجتمعًا يمدّ فيه كل فوج الفوج
+          الذي يليه بالمعرفة، وتنتقل الموارد الجيدة بسهولة، ويشعر كل طالب
+          بالتنظيم والثقة والمساندة طوال مساره الدراسي.
         </p>
         <div class="actions">
           <a class="btn" href="index.html">Retourner à l’accueil</a>
-          <a href="mailto:contact@fstsdriver.example">Contribuer à la plateforme →</a>
+          <a href="mission.html">Découvrir notre mission →</a>
         </div>
       </article>
     </main>
