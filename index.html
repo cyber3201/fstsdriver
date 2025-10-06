@@ -1327,7 +1327,8 @@ footer {
             <div class="home-catalog-grid" role="list">
               <a
                 class="catalog-card"
-                href="explorer-filiere.html?group=tronc-commun"
+                href="#group-panel"
+                data-group="tronc-commun"
               >
                 <h3>Tronc commun</h3>
                 <p>
@@ -1339,7 +1340,8 @@ footer {
               </a>
               <a
                 class="catalog-card"
-                href="explorer-filiere.html?group=licence"
+                href="#group-panel"
+                data-group="licence"
               >
                 <h3>Licence Sciences et Techniques</h3>
                 <p>
@@ -1352,7 +1354,8 @@ footer {
               </a>
               <a
                 class="catalog-card"
-                href="explorer-filiere.html?group=master"
+                href="#group-panel"
+                data-group="master"
               >
                 <h3>Master Sciences et Techniques</h3>
                 <p>
@@ -1365,7 +1368,8 @@ footer {
               </a>
               <a
                 class="catalog-card"
-                href="explorer-filiere.html?group=ingenieur"
+                href="#group-panel"
+                data-group="ingenieur"
               >
                 <h3>Cycle d’ingénieur</h3>
                 <p>
@@ -2197,7 +2201,10 @@ if (catalogHomeLink) {
 }
 
 catalogCards.forEach((card) => {
-  card.addEventListener("click", () => {
+  card.addEventListener("click", (event) => {
+    if (event && typeof event.preventDefault === "function" && card.tagName === "A") {
+      event.preventDefault();
+    }
     const groupKey = card.dataset.group;
     if (!groupKey) return;
     state.view = "filiere";
