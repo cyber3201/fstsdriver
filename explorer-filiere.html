@@ -286,42 +286,83 @@
       }
 
       .catalog-card {
+        position: relative;
         display: flex;
         flex-direction: column;
-        gap: 0.75rem;
-        padding: clamp(1.75rem, 4vw, 2.25rem);
-        border-radius: 1.25rem;
-        background: var(--card-bg);
-        border: 1px solid rgba(39, 64, 96, 0.08);
-        box-shadow: 0 18px 36px rgba(39, 64, 96, 0.1);
+        gap: 1rem;
+        padding: clamp(2.2rem, 4vw, 2.6rem) clamp(1.8rem, 4vw, 2.2rem);
+        border-radius: 1.35rem;
+        background: transparent;
+        border: none;
+        box-shadow: 0 26px 52px rgba(13, 19, 38, 0.28);
         text-align: left;
         text-decoration: none;
-        color: var(--primary);
-        transition: transform 0.2s ease, box-shadow 0.2s ease,
-          border-color 0.2s ease;
+        color: #ffffff;
+        overflow: hidden;
+        min-height: 280px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+      }
+
+      .catalog-card::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(165deg, rgba(9, 16, 32, 0.92), rgba(9, 16, 32, 0.65)),
+          url("https://live.staticflickr.com/65535/54836030454_8abf777525.jpg")
+            center/cover no-repeat;
+        transition: transform 0.35s ease;
+        z-index: 0;
+      }
+
+      .catalog-card > * {
+        position: relative;
+        z-index: 1;
       }
 
       .catalog-card h2 {
         margin: 0;
-        font-size: 1.35rem;
+        font-size: 1.38rem;
+        color: #ffd15c;
+        text-align: left;
       }
 
       .catalog-card p {
         margin: 0;
-        color: var(--muted);
+        color: rgba(255, 255, 255, 0.92);
+        text-align: left;
       }
 
       .catalog-card span {
         font-weight: 600;
-        color: var(--accent);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.45rem;
+        color: #101820;
+        background: #ffcc4d;
+        border-radius: 999px;
+        padding: 0.7rem 1.45rem;
+        margin-top: auto;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        align-self: flex-start;
       }
 
       .catalog-card:hover,
       .catalog-card:focus {
-        transform: translateY(-4px);
-        box-shadow: 0 24px 48px rgba(39, 64, 96, 0.16);
-        border-color: rgba(31, 42, 68, 0.22);
+        transform: translateY(-6px);
+        box-shadow: 0 32px 60px rgba(9, 16, 32, 0.4);
         outline: none;
+      }
+
+      .catalog-card:hover::before,
+      .catalog-card:focus::before {
+        transform: scale(1.05);
+      }
+
+      .catalog-card:hover span,
+      .catalog-card:focus span {
+        transform: translateX(4px);
+        box-shadow: 0 12px 24px rgba(255, 204, 77, 0.45);
       }
 
       footer {
