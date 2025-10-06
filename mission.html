@@ -14,14 +14,13 @@
       type="image/jpeg"
       href="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
     />
-    <title>FSTS DRIVE – L’équipe</title>
+    <title>FSTS DRIVE – Mission</title>
     <style>
       :root {
         --primary: #1f2a44;
         --accent: #f0a500;
-        --background-dark: linear-gradient(180deg, #10192d 0%, #1f2a44 100%);
-        --card-bg: rgba(15, 22, 38, 0.78);
-        --border-light: rgba(255, 255, 255, 0.12);
+        --background-light: linear-gradient(180deg, #f3f5fb 0%, #ffffff 100%);
+        --card-border: rgba(31, 42, 68, 0.08);
         --border: rgba(31, 42, 68, 0.12);
         --header-height: 64px;
       }
@@ -34,8 +33,8 @@
         margin: 0;
         font-family: "Readex Pro", "Rubik", -apple-system, BlinkMacSystemFont,
           "Segoe UI", sans-serif;
-        background: var(--background-dark);
-        color: #ffffff;
+        background: var(--background-light);
+        color: var(--primary);
         min-height: 100vh;
         display: flex;
         flex-direction: column;
@@ -232,14 +231,13 @@
 
       .page-shell {
         width: min(860px, 92vw);
-        background: var(--card-bg);
+        background: #ffffff;
         border-radius: 1.5rem;
         padding: clamp(2rem, 6vw, 3.5rem);
-        box-shadow: 0 30px 80px rgba(5, 10, 20, 0.45);
-        backdrop-filter: blur(6px);
+        box-shadow: 0 30px 80px rgba(31, 42, 68, 0.12);
         display: grid;
         gap: 1.5rem;
-        border: 1px solid var(--border-light);
+        border: 1px solid var(--card-border);
       }
 
       @media (max-width: 768px) {
@@ -255,28 +253,30 @@
       h1 {
         margin: 0;
         font-size: clamp(2rem, 4vw, 2.8rem);
+        text-align: center;
       }
 
       p {
         margin: 0;
-        color: rgba(255, 255, 255, 0.85);
+        color: #5f6c7b;
         text-align: justify;
       }
 
-      ul {
-        margin: 0;
-        padding-left: 1.25rem;
-        display: grid;
-        gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.9);
+      .text-divider {
+        width: 90px;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--accent), transparent);
+        margin: 0.75rem auto;
+        border-radius: 999px;
       }
 
-      strong {
-        color: #ffffff;
+      .rtl {
+        direction: rtl;
+        text-align: justify;
       }
 
       a {
-        color: #ffd15c;
+        color: var(--accent);
         font-weight: 600;
         text-decoration: none;
       }
@@ -303,19 +303,19 @@
         padding: 0.75rem 1.5rem;
         border-radius: 999px;
         border: none;
-        background: #ffcc4d;
-        color: #101820;
+        background: var(--primary);
+        color: #ffffff;
         font-weight: 600;
         cursor: pointer;
         text-decoration: none;
         transition: transform 0.18s ease, box-shadow 0.18s ease;
-        box-shadow: 0 18px 36px rgba(255, 204, 77, 0.25);
+        box-shadow: 0 18px 36px rgba(31, 42, 68, 0.25);
       }
 
       .btn:hover,
       .btn:focus {
         transform: translateY(-2px);
-        box-shadow: 0 22px 48px rgba(255, 204, 77, 0.35);
+        box-shadow: 0 22px 48px rgba(31, 42, 68, 0.32);
         outline: none;
       }
 
@@ -539,8 +539,8 @@
         <div class="nav-list">
           <a class="nav-link" href="index.html">Accueil</a>
           <a class="nav-link" href="explorer-filiere.html">Explorer les Filières</a>
-          <a class="nav-link" href="why.html">Mission</a>
-          <a class="nav-link active" href="team.html">Vision</a>
+          <a class="nav-link active" href="mission.html">Mission</a>
+          <a class="nav-link" href="vision.html">Vision</a>
           <a class="nav-link" href="mailto:zakariagbibar4@gmail.com"
             >Contactez-Nous</a
           >
@@ -550,33 +550,33 @@
 
     <main>
       <article class="page-shell">
-        <h1>Qui maintient FSTS Driver&nbsp;?</h1>
+        <h1>Mission</h1>
         <p>
-          Le site est animé par un petit collectif d’étudiants bénévoles de
-          différentes filières. Chacun contribue selon ses forces&nbsp;: collecte
-          des documents, structuration des dossiers, vérification des accès ou
-          développement de nouvelles fonctionnalités.
+          Nous avons créé FSTS Driver afin de faciliter l’accès aux ressources
+          pédagogiques pour tous les étudiants de la Faculté des Sciences et
+          Techniques de Settat. Notre objectif est de centraliser, dans une seule
+          plateforme simple et intuitive, l’ensemble des cours, TDs, TPs et
+          documents utiles à chaque filière. Grâce à FSTS Driver, les étudiants
+          n’ont plus besoin de chercher dans les groupes ou de demander sans cesse
+          les liens Google Drive. Tout est désormais accessible facilement, à tout
+          moment, en un seul endroit. Il suffit simplement de taper
+          <strong>drivefsts.org</strong> pour trouver tout ce dont vous avez
+          besoin tout au long de votre parcours académique à la FSTS Settat.
         </p>
-        <p>Notre équipe s’articule autour de trois pôles&nbsp;:</p>
-        <ul>
-          <li><strong>Coordination :</strong> suivi des demandes et du planning.</li>
-          <li>
-            <strong>Contenu :</strong> veille sur les ressources, organisation des
-            drives et métadonnées.
-          </li>
-          <li>
-            <strong>Technique :</strong> maintenance du site, amélioration de
-            l’expérience utilisateur et support.
-          </li>
-        </ul>
-        <p>
-          Nous sommes toujours ouverts aux nouvelles contributions. Si vous
-          souhaitez rejoindre l’aventure ou partager vos propres cours, écrivez-nous
-          et nous vous guiderons pour intégrer vos ressources à la plateforme.
+        <div class="text-divider" aria-hidden="true"></div>
+        <p class="rtl">
+          قمنا بإنشاء هذه المنصة بهدف تسهيل وصول جميع طلبة كلية العلوم والتقنيات
+          بسطات إلى الموارد البيداغوجية. يتمثل هدفنا في جمع كل الدروس، والأعمال
+          الموجهة، والأعمال التطبيقية، والوثائق المفيدة لكل مسلك، في مكان واحد
+          سهل وبسيط الاستخدام. بفضل هذه المنصة، لم يعد الطالب بحاجة إلى البحث في
+          المجموعات أو سؤال المندوبين عن الروابط الخاصة بالمواد الدراسية. كل شيء
+          متاح الآن في مكان واحد، بشكل منظم وسهل الوصول إليه في أي وقت. يكفي فقط
+          كتابة عنوان الموقع <strong>drivefsts.org</strong> لتجدوا كل ما تحتاجونه
+          طيلة مساركم الأكاديمي بكلية العلوم والتقنيات بسطات.
         </p>
         <div class="actions">
           <a class="btn" href="index.html">Retourner à l’accueil</a>
-          <a href="mailto:contact@fstsdriver.example">Contribuer à la plateforme →</a>
+          <a href="vision.html">Découvrir notre vision →</a>
         </div>
       </article>
     </main>
@@ -599,14 +599,12 @@
           <nav class="footer-nav" aria-label="Liens secondaires">
             <a href="index.html">Accueil</a>
             <a href="explorer-filiere.html">Explorer les Filières</a>
-            <a href="why.html">Mission</a>
-            <a href="team.html">Vision</a>
+            <a href="mission.html">Mission</a>
+            <a href="vision.html">Vision</a>
           </nav>
         </div>
         <div class="footer-bottom">
-          <span
-            >© <span id="footer-year"></span> FSTS DRIVE – Ressources partagées par la communauté étudiante de la FST Settat.</span
-          >
+          <span>© 2025 FSTS DRIVE — Plateforme indépendante créée par Zakarya G.</span>
           <span>Conçu avec passion pour la communauté FST Settat.</span>
         </div>
       </div>
@@ -681,10 +679,6 @@
         }
       });
 
-      const yearTarget = document.getElementById("footer-year");
-      if (yearTarget) {
-        yearTarget.textContent = new Date().getFullYear();
-      }
     </script>
   </body>
 </html>

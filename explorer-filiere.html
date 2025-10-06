@@ -618,8 +618,8 @@
           <a class="nav-link active" href="explorer-filiere.html"
             >Explorer les Filières</a
           >
-          <a class="nav-link" href="why.html">Mission</a>
-          <a class="nav-link" href="team.html">Vision</a>
+          <a class="nav-link" href="mission.html">Mission</a>
+          <a class="nav-link" href="vision.html">Vision</a>
           <a class="nav-link" href="mailto:zakariagbibar4@gmail.com"
             >Contactez-Nous</a
           >
@@ -642,28 +642,40 @@
           <div class="catalog-grid" role="list">
             <a class="catalog-card" href="index.html?group=tronc-commun">
               <h2>Tronc commun</h2>
-              <p>Accédez aux différentes spécialités du Tronc Commun.</p>
+              <p>
+                Le tronc commun offre une base solide en sciences
+                fondamentales, préparant les étudiants à se spécialiser avec
+                succès dans la filière de leur choix.
+              </p>
               <span>Voir les spécialités →</span>
             </a>
             <a class="catalog-card" href="index.html?group=licence">
               <h2>Licence Sciences et Techniques</h2>
               <p>
-                Accédez aux différentes spécialités des Licences Sciences et
-                Techniques.
+                La Licence en sciences et techniques offre une formation
+                polyvalente, alliant théorie et pratique, pour préparer les
+                étudiants à des carrières scientifiques et techniques de haut
+                niveau.
               </p>
               <span>Voir les spécialités →</span>
             </a>
             <a class="catalog-card" href="index.html?group=master">
               <h2>Master Sciences et Techniques</h2>
               <p>
-                Accédez aux différentes spécialités des Masters Sciences et
-                Techniques.
+                Le Master en sciences et techniques approfondit les
+                connaissances et développe l'expertise des étudiants dans des
+                domaines scientifiques avancés, en les formant pour des postes
+                à responsabilités.
               </p>
               <span>Voir les spécialités →</span>
             </a>
             <a class="catalog-card" href="index.html?group=ingenieur">
               <h2>Cycle d’ingénieur</h2>
-              <p>Accédez aux différentes spécialités du Cycle d’ingénieur.</p>
+              <p>
+                Le cycle d'ingénieur forme des professionnels compétents et
+                innovants, capables de concevoir des solutions techniques
+                adaptées aux besoins des industries modernes.
+              </p>
               <span>Voir les spécialités →</span>
             </a>
           </div>
@@ -689,30 +701,12 @@
           <nav class="footer-nav" aria-label="Liens secondaires">
             <a href="index.html">Accueil</a>
             <a href="explorer-filiere.html">Explorer les Filières</a>
-            <a href="why.html">Mission</a>
-            <a href="team.html">Vision</a>
+            <a href="mission.html">Mission</a>
+            <a href="vision.html">Vision</a>
           </nav>
         </div>
-        <section class="footer-disclaimer" aria-label="Disclaimer">
-          <h3>DISCLAIMER</h3>
-          <p>
-            Ce site est une plateforme indépendante créée et maintenue par un
-            étudiant. Il ne s’agit pas du site officiel de la Faculté des
-            Sciences et Techniques de Settat. Les liens et ressources sont
-            fournis par les délégués et les étudiants de chaque filière. Les
-            contenus (cours, PDFs, enregistrements, etc.) restent la propriété de
-            leurs auteurs.
-          </p>
-          <p>
-            Pour tout retrait ou signalement :
-            <a href="mailto:zakariagbibar4@gmail.com">contactez-nous</a>.
-          </p>
-        </section>
         <div class="footer-bottom">
-          <span
-            >© <span id="footer-year"></span> FSTS DRIVE – Ressources
-            partagées par la communauté étudiante de la FST Settat.</span
-          >
+          <span>© 2025 FSTS DRIVE — Plateforme indépendante créée par Zakarya G.</span>
           <span>Conçu avec passion pour la communauté FST Settat.</span>
         </div>
       </div>
@@ -723,7 +717,6 @@
       const navWrapper = document.getElementById("primary-nav");
       const navToggleLabel = navToggle ? navToggle.querySelector(".sr-only") : null;
       const navLinks = navWrapper ? navWrapper.querySelectorAll("a") : [];
-      const footerYear = document.getElementById("footer-year");
       const MOBILE_BREAKPOINT = 900;
 
       function isMobileView() {
@@ -778,9 +771,6 @@
         }
       });
 
-      if (footerYear) {
-        footerYear.textContent = new Date().getFullYear();
-      }
     </script>
   </body>
 </html>
