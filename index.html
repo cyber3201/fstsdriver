@@ -177,9 +177,6 @@ nav.nav-wrapper {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   justify-content: center;
   justify-items: stretch;
-  width: min(100%, 1100px);
-  margin: 0 auto;
-  padding-inline: clamp(1rem, 3vw, 1.75rem);
 }
 
 .hero {
@@ -343,9 +340,6 @@ nav.nav-wrapper {
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   justify-content: center;
   justify-items: stretch;
-  width: min(100%, 1100px);
-  margin: 0 auto;
-  padding-inline: clamp(1rem, 3vw, 1.75rem);
 }
 
 .catalog-card {
@@ -437,57 +431,9 @@ nav.nav-wrapper {
 }
 
 @media (min-width: 1024px) {
-  .home-catalog-inner {
-    width: min(1240px, 94vw);
-  }
-
-  .catalog-shell {
-    width: min(1240px, 94vw);
-  }
-
-  .home-catalog-grid,
-  .catalog-grid {
-    gap: 2.5rem;
-  }
-
   .catalog-card {
-    padding: 2.85rem 2.55rem;
-    border-radius: 1.6rem;
-    min-height: 320px;
-  }
-
-  .catalog-card h3 {
-    font-size: 1.6rem;
-  }
-
-  .catalog-card p,
-  .catalog-card span {
-    font-size: 1.05rem;
-  }
-
-  .catalog-card span {
-    padding: 0.75rem 1.6rem;
-  }
-}
-
-@media (min-width: 1200px) {
-  .home-catalog-inner,
-  .catalog-shell {
-    width: min(1240px, max(1136px, 96vw));
-  }
-
-  .home-catalog-grid,
-  .catalog-grid {
-    grid-template-columns: repeat(4, minmax(260px, 260px));
-    column-gap: 2.5rem;
-    width: max-content;
-    margin-inline: auto;
-    padding-inline: 0;
-  }
-
-  .home-catalog-grid > *,
-  .catalog-grid > * {
-    width: 260px;
+    padding: 2.6rem 2.2rem;
+    border-radius: 1.5rem;
   }
 }
 
@@ -1234,8 +1180,8 @@ footer {
     padding: 1.25rem;
   }
 
-  .mission-vision {
-    gap: 2.25rem;
+  .mission-vision { 
+    gap: 0;
   }
 
   .mission-vision-card {
