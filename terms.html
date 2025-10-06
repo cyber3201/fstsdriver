@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/jpeg"
+      href="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
+    />
+    <title>FSTS DRIVE – Conditions d’utilisation</title>
+    <style>
+      :root {
+        --primary: #1f2a44;
+        --accent: #f0a500;
+        --background-light: linear-gradient(180deg, #f3f5fb 0%, #ffffff 100%);
+        --card-border: rgba(31, 42, 68, 0.08);
+        --border: rgba(31, 42, 68, 0.12);
+        --header-height: 64px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Readex Pro", "Rubik", -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+        background: var(--background-light);
+        color: var(--primary);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        line-height: 1.65;
+      }
+
+      p {
+        text-align: justify;
+      }
+
+      header {
+        background: #ffffff;
+        color: var(--primary);
+        padding: 0.7rem 1.15rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.6rem;
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        border-bottom: 1px solid rgba(39, 64, 96, 0.12);
+        box-shadow: 0 6px 16px rgba(15, 25, 40, 0.08);
+        min-height: var(--header-height);
+      }
+
+      .brand {
+        text-decoration: none;
+        color: inherit;
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+      }
+
+      .brand-logo {
+        width: clamp(40px, 8vw, 56px);
+        height: auto;
+        border-radius: 12px;
+        box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+      }
+
+      .brand-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.15rem;
+      }
+
+      .brand-text strong {
+        font-size: clamp(1.05rem, 2.2vw, 1.4rem);
+        color: var(--primary);
+      }
+
+      .brand-text span {
+        font-size: clamp(0.78rem, 1.9vw, 0.95rem);
+        opacity: 0.85;
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      nav.nav-wrapper {
+        display: flex;
+        gap: 0.5rem;
+        flex: 1 1 auto;
+        justify-content: flex-end;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .nav-list {
+        display: flex;
+        gap: 0.6rem;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+
+      .nav-link {
+        text-decoration: none;
+        color: var(--primary);
+        font-weight: 600;
+        padding: 0.45rem 0.95rem;
+        border-radius: 0.9rem;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        box-shadow: 0 10px 20px rgba(31, 42, 68, 0.08);
+        transition: background 0.2s ease, border-color 0.2s ease,
+          box-shadow 0.2s ease;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .nav-link:hover,
+      .nav-link:focus {
+        background: rgba(240, 165, 0, 0.12);
+        border-color: rgba(31, 42, 68, 0.28);
+        outline: none;
+        box-shadow: 0 14px 28px rgba(31, 42, 68, 0.12);
+      }
+
+      .nav-link.active {
+        background: var(--accent);
+        color: #1a1a1a;
+        border-color: transparent;
+        box-shadow: 0 16px 32px rgba(240, 165, 0, 0.28);
+      }
+
+      .nav-toggle {
+        display: none;
+        position: relative;
+        width: 36px;
+        height: 36px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: #ffffff;
+        color: var(--primary);
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: background 0.2s ease, transform 0.2s ease;
+      }
+
+      .nav-toggle:hover,
+      .nav-toggle:focus {
+        background: rgba(240, 165, 0, 0.12);
+        outline: none;
+      }
+
+      .nav-toggle.open {
+        background: var(--accent);
+        border-color: transparent;
+        color: #1a1a1a;
+      }
+
+      .nav-toggle .nav-toggle-bar {
+        position: absolute;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      .nav-toggle::before,
+      .nav-toggle::after {
+        content: "";
+        position: absolute;
+        width: 18px;
+        height: 2px;
+        background: currentColor;
+        transition: transform 0.2s ease, opacity 0.2s ease;
+        top: 50%;
+        left: 50%;
+        transform-origin: center;
+      }
+
+      .nav-toggle::before {
+        transform: translate(-50%, -50%) translateY(-6px);
+      }
+
+      .nav-toggle::after {
+        transform: translate(-50%, -50%) translateY(6px);
+      }
+
+      .nav-toggle.open .nav-toggle-bar {
+        opacity: 0;
+      }
+
+      .nav-toggle.open::before {
+        transform: translate(-50%, -50%) rotate(45deg);
+      }
+
+      .nav-toggle.open::after {
+        transform: translate(-50%, -50%) rotate(-45deg);
+      }
+
+      .nav-wrapper.open {
+        display: flex;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: clamp(3rem, 6vw, 4.5rem) 0;
+      }
+
+      .page-shell {
+        width: min(900px, 92vw);
+        margin: 0 auto;
+        background: rgba(255, 255, 255, 0.92);
+        border: 1px solid var(--card-border);
+        border-radius: 24px;
+        box-shadow: 0 24px 48px rgba(15, 25, 40, 0.08);
+        padding: clamp(2rem, 5vw, 3rem);
+        display: grid;
+        gap: 1.5rem;
+      }
+
+      .page-shell h1 {
+        font-size: clamp(2.1rem, 4vw, 2.6rem);
+        margin: 0;
+        text-align: center;
+        color: var(--primary);
+      }
+
+      .meta {
+        background: rgba(240, 165, 0, 0.12);
+        border-left: 4px solid var(--accent);
+        border-radius: 14px;
+        padding: 1.25rem 1.5rem;
+        display: grid;
+        gap: 0.25rem;
+      }
+
+      .meta p {
+        margin: 0;
+        text-align: left;
+      }
+
+      .section-title {
+        font-size: 1.35rem;
+        margin: 0;
+        color: var(--primary);
+      }
+
+      .terms-section {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .terms-section p {
+        margin: 0;
+      }
+
+      .terms-section p + p {
+        margin-top: 0.35rem;
+      }
+
+      .terms-section strong {
+        color: var(--primary);
+      }
+
+      .notice {
+        font-weight: 600;
+        color: var(--primary);
+      }
+
+      footer {
+        margin-top: auto;
+        background: #0c1c32;
+        color: rgba(224, 234, 247, 0.92);
+        padding: clamp(2rem, 6vw, 3rem) 1.5rem;
+      }
+
+      .footer-shell {
+        width: min(1100px, 92vw);
+        margin: 0 auto;
+        display: grid;
+        gap: clamp(2rem, 5vw, 3rem);
+      }
+
+      .footer-head {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+
+      .footer-brand {
+        display: flex;
+        align-items: center;
+        gap: 0.85rem;
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .footer-logo {
+        width: clamp(44px, 11vw, 62px);
+        height: auto;
+        border-radius: 16px;
+        box-shadow: 0 10px 24px rgba(5, 10, 20, 0.35);
+      }
+
+      .footer-text {
+        display: flex;
+        flex-direction: column;
+        gap: 0.2rem;
+        font-size: 0.95rem;
+      }
+
+      .footer-text span:first-child {
+        font-weight: 700;
+      }
+
+      .footer-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        justify-content: flex-start;
+      }
+
+      .footer-nav a {
+        color: rgba(224, 234, 247, 0.92);
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.45rem 0.85rem;
+        border-radius: 999px;
+        border: 1px solid rgba(255, 255, 255, 0.14);
+        transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+      }
+
+      .footer-nav a:hover,
+      .footer-nav a:focus {
+        background: rgba(255, 204, 77, 0.16);
+        color: #ffcc4d;
+        border-color: rgba(255, 204, 77, 0.45);
+        outline: none;
+      }
+
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        padding-top: 1.5rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        text-align: center;
+        font-size: 0.88rem;
+        color: rgba(207, 219, 232, 0.8);
+      }
+
+      @media (max-width: 900px) {
+        header {
+          padding: 0.7rem 1rem;
+        }
+
+        .brand {
+          flex: 1;
+        }
+
+        .nav-toggle {
+          display: inline-flex;
+        }
+
+        nav.nav-wrapper {
+          position: absolute;
+          top: calc(100% + 0.75rem);
+          left: 1.25rem;
+          right: 1.25rem;
+          background: #ffffff;
+          border: 1px solid rgba(39, 64, 96, 0.12);
+          border-radius: 1rem;
+          padding: 0.75rem;
+          box-shadow: 0 18px 36px rgba(15, 23, 42, 0.12);
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.65rem;
+          display: none;
+          z-index: 120;
+        }
+
+        nav.nav-wrapper.open {
+          display: flex;
+        }
+
+        .nav-list {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.65rem;
+        }
+
+        .nav-link {
+          width: 100%;
+          justify-content: flex-start;
+          font-size: 1rem;
+          padding: 0.75rem 0.95rem;
+          box-shadow: none;
+          border-radius: 0.95rem;
+        }
+
+        .page-shell {
+          border-radius: 20px;
+          padding: 2rem 1.5rem;
+        }
+
+        .footer-head {
+          align-items: center;
+          text-align: center;
+        }
+
+        .footer-brand {
+          flex-direction: column;
+          text-align: center;
+        }
+
+        .footer-nav {
+          justify-content: center;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .footer-head {
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: center;
+          text-align: left;
+        }
+
+        .footer-nav {
+          justify-content: flex-end;
+        }
+
+        .footer-bottom {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+          gap: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <a class="brand" href="index.html">
+        <img
+          src="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
+          alt="FSTS DRIVE logo"
+          class="brand-logo"
+          loading="lazy"
+        />
+        <div class="brand-text">
+          <strong>FSTS DRIVE</strong>
+          <span>Bibliothèque Globale des Ressources</span>
+        </div>
+      </a>
+      <button
+        type="button"
+        class="nav-toggle"
+        id="nav-toggle"
+        aria-expanded="false"
+        aria-controls="primary-nav"
+      >
+        <span class="nav-toggle-bar" aria-hidden="true"></span>
+        <span class="sr-only">Ouvrir le menu</span>
+      </button>
+      <nav
+        class="nav-wrapper"
+        id="primary-nav"
+        aria-label="Navigation principale"
+      >
+        <div class="nav-list">
+          <a class="nav-link" href="index.html">Accueil</a>
+          <a class="nav-link" href="explorer-filiere.html">Explorer les Filières</a>
+          <a class="nav-link" href="mission.html">Mission</a>
+          <a class="nav-link" href="vision.html">Vision</a>
+          <a class="nav-link" href="mailto:zakariagbibar4@gmail.com">Contactez-Nous</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <article class="page-shell">
+        <h1>Conditions Générales d’Utilisation</h1>
+        <div class="meta" aria-label="Informations légales">
+          <p><strong>Site :</strong> FSTS Drive</p>
+          <p><strong>Administrateur :</strong> Zakarya.g</p>
+          <p>
+            <strong>Statut :</strong> Plateforme gratuite et non-officielle d’agrégation de liens
+            Google Drive
+          </p>
+        </div>
+
+        <section class="terms-section" aria-labelledby="section-preambule">
+          <h2 id="section-preambule" class="section-title">1) Préambule &amp; Acceptation</h2>
+          <p>
+            Les présentes conditions (les « CGU ») encadrent l’accès et l’utilisation du site FSTS
+            Drive. En naviguant sur le site, l’utilisateur reconnaît avoir lu, compris et accepté les
+            CGU. Si l’utilisateur n’accepte pas les CGU, il doit cesser toute utilisation du site.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-objet">
+          <h2 id="section-objet" class="section-title">2) Objet et finalité éducative</h2>
+          <p>
+            FSTS Drive a pour seule finalité de faciliter l’accès aux ressources pédagogiques
+            destinées aux étudiants de la Faculté des Sciences et Techniques de Settat (FSTS).
+            La plateforme agit comme annuaire/agrégateur de liens pointant exclusivement vers des
+            contenus hébergés sur Google Drive (cours, TD, TP, résumés, etc.) fournis/partagés par des
+            délégués d’option ou étudiants.
+          </p>
+          <p>
+            Le site est gratuit, non commercial, et non affilié officiellement à la FSTS. Le site n’a
+            pas vocation à remplacer les cours en présentiel, l’assiduité, ni les obligations
+            pédagogiques.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-nature">
+          <h2 id="section-nature" class="section-title">3) Nature des contenus &amp; rôle d’intermédiaire technique</h2>
+          <p>
+            Le site n’héberge pas de fichiers : tous les contenus restent sur Google Drive ou autres
+            plateformes externes.
+          </p>
+          <p>
+            Aucun fichier n’est stocké, modifié ou réédité par FSTS Drive. L’administrateur ne
+            revendique aucun droit sur les documents liés et n’en garantit ni l’exactitude ni
+            l’actualité.
+          </p>
+          <p>
+            Tout lien peut devenir indisponible (suppression par son propriétaire, changement d’accès,
+            etc.) sans que la responsabilité du site ne puisse être engagée.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-affiliation">
+          <h2 id="section-affiliation" class="section-title">4) Absence d’affiliation institutionnelle</h2>
+          <p>
+            FSTS Drive est une initiative personnelle et indépendante de Zakarya.g. Toute référence à
+            la FSTS est purement descriptive. Aucune relation contractuelle ou institutionnelle
+            n’existe avec l’administration ou le corps enseignant.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-acces">
+          <h2 id="section-acces" class="section-title">5) Accès et bon usage</h2>
+          <p class="notice">L’utilisateur s’engage à :</p>
+          <p>• respecter les droits d’auteur et les licences applicables aux contenus liés ;</p>
+          <p>• ne pas contourner les restrictions d’accès posées par les propriétaires des fichiers ;</p>
+          <p>• ne pas porter atteinte au bon fonctionnement du site ni aux droits des tiers.</p>
+          <p>
+            L’accès et l’usage des ressources s’effectuent sous l’entière responsabilité de
+            l’utilisateur.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-propriete">
+          <h2 id="section-propriete" class="section-title">6) Propriété intellectuelle (site &amp; contenus tiers)</h2>
+          <p>
+            Le nom FSTS Drive, le logo, l’ergonomie, le design et le code du site appartiennent à
+            Zakarya.g et sont protégés par le droit d’auteur.
+          </p>
+          <p>
+            Les documents liés (PDF, présentations, images, vidéos, etc.) restent la propriété
+            exclusive de leurs auteurs/établissements. Toute reproduction, diffusion ou usage non
+            autorisé est interdit sans l’accord préalable du titulaire des droits.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-signalement">
+          <h2 id="section-signalement" class="section-title">7) Signalement &amp; procédure de retrait (notice &amp; takedown)</h2>
+          <p>
+            Tout auteur/enseignant/étudiant ou tiers estimant qu’un lien porte atteinte à ses droits
+            (droits d’auteur, confidentialité, erreur manifeste, contenu inapproprié) peut demander son
+            retrait :
+          </p>
+          <p class="notice">via le formulaire de contact du site, en précisant :</p>
+          <p>• URL du lien concerné,</p>
+          <p>• motif détaillé du signalement,</p>
+          <p>• justificatifs utiles (si disponibles).</p>
+          <p>
+            Les demandes motivées sont examinées avec diligence ; les liens litigieux pourront être
+            désindexés/supprimés promptement après vérification.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-limitation">
+          <h2 id="section-limitation" class="section-title">8) Limitation de responsabilité</h2>
+          <p>
+            Dans les limites permises par la loi : le site et son administrateur déclinent toute
+            responsabilité quant au contenu des liens externes, à leur licéité, à leur exactitude, ou à
+            leur disponibilité ; aucune garantie (expresse/implicite) n’est fournie quant à
+            l’adéquation des contenus à un usage particulier ; la responsabilité du site ne saurait être
+            engagée pour tout préjudice direct ou indirect résultant de l’utilisation des liens.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-maintenance">
+          <h2 id="section-maintenance" class="section-title">9) Disponibilité, maintenance &amp; évolutions</h2>
+          <p>
+            L’accès au site peut être suspendu ou limité sans préavis pour maintenance, mise à jour, ou
+            cas de force majeure. Les CGU peuvent être modifiées à tout moment ; la version opposable
+            est celle publiée sur le site à la date de consultation.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-confidentialite">
+          <h2 id="section-confidentialite" class="section-title">10) Politique de confidentialité (données personnelles)</h2>
+          <p>
+            Aucune donnée n’est collectée automatiquement (pas de création de compte, pas d’analytics
+            intrusifs, pas de tracking marketing). La seule collecte intervient via le formulaire de
+            contact et repose sur le consentement explicite de l’utilisateur.
+          </p>
+          <p class="notice">Données collectées via le formulaire (champs typiques) :</p>
+          <p>• Nom/Prénom,</p>
+          <p>• Adresse e-mail de réponse,</p>
+          <p>• Message (réclamation/suggestion/signalement),</p>
+          <p>
+            Finalités : traiter la demande (support, retrait de lien, information). Base légale :
+            consentement de l’utilisateur et intérêt légitime à gérer le support. Durée de conservation :
+            le temps strictement nécessaire au traitement puis suppression. Partage : aucun partage à des
+            tiers, sauf obligation légale. Sécurité : mesures raisonnables (contrôle d’accès,
+            minimisation des données).
+          </p>
+          <p>
+            Cookies : le site vise le zéro cookie non essentiel. S’il s’avérait nécessaire d’en utiliser
+            (ex. anti-spam), l’information sera fournie et limitée au strict nécessaire.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-liens">
+          <h2 id="section-liens" class="section-title">11) Liens hypertextes externes</h2>
+          <p>
+            Tout lien externe (notamment Google Drive) ouvre vers un site/service tiers soumis à ses
+            propres conditions. L’utilisateur est invité à en prendre connaissance. FSTS Drive n’exerce
+            aucun contrôle sur ces services tiers.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-indemnisation">
+          <h2 id="section-indemnisation" class="section-title">12) Indemnisation</h2>
+          <p>
+            L’utilisateur s’engage à garantir et indemniser l’éditeur contre toute réclamation de tiers
+            résultant d’une utilisation non conforme du site ou d’une violation des CGU/droits de
+            propriété intellectuelle.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-loi">
+          <h2 id="section-loi" class="section-title">13) Loi applicable &amp; juridiction</h2>
+          <p>
+            Les présentes CGU sont régies par le droit marocain. Tout différend relatif à leur validité,
+            interprétation ou exécution relève des tribunaux compétents du Royaume du Maroc.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-contact">
+          <h2 id="section-contact" class="section-title">14) Contact officiel (unique)</h2>
+          <p>
+            Toute demande (réclamation, retrait, données personnelles, question) doit passer
+            exclusivement par le formulaire de contact du site. Aucun e-mail direct n’est traité : cette
+            centralisation garantit la traçabilité et la protection des données.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-cloture">
+          <h2 id="section-cloture" class="section-title">Informations complémentaires</h2>
+          <p>© 2025 FSTS Drive — Tous droits réservés.</p>
+          <p>Annuaire non-officiel de liens Google Drive pour étudiants FSTS Settat.</p>
+          <p>Site statique — aucun hébergement de fichiers, aucune collecte automatique de données.</p>
+          <p>Réclamations &amp; contact (retraits, données personnelles) : via le formulaire de contact.</p>
+          <p>
+            Réclamations &amp; contact (retraits, données personnelles) : via le formulaire de contact :
+            <a href="https://form.jotform.com/252786787245070" target="_blank" rel="noopener noreferrer"
+              >https://form.jotform.com/252786787245070</a
+            >.
+          </p>
+        </section>
+
+        <section class="terms-section" aria-labelledby="section-mentions">
+          <h2 id="section-mentions" class="section-title">Mentions légales (version courte)</h2>
+          <p>
+            Éditeur : Zakarya.g — Projet étudiant, non affilié à la FSTS.
+          </p>
+          <p>
+            Nature du service : agrégateur de liens Google Drive fournis par des délégués/étudiants ;
+            aucun hébergement local.
+          </p>
+          <p>
+            Données personnelles : traitements limités au formulaire de contact ; droits d’accès/
+            rectification/suppression via le formulaire.
+          </p>
+          <p>
+            Retrait de contenu : procédure de notice &amp; takedown via le formulaire :
+            <a href="https://form.jotform.com/252786787245070" target="_blank" rel="noopener noreferrer"
+              >https://form.jotform.com/252786787245070</a
+            >.
+          </p>
+        </section>
+      </article>
+    </main>
+
+    <footer>
+      <div class="footer-shell">
+        <div class="footer-head">
+          <a class="footer-brand" href="index.html">
+            <img
+              src="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
+              alt="FSTS DRIVE logo"
+              class="footer-logo"
+              loading="lazy"
+            />
+            <div class="footer-text">
+              <span>FSTS DRIVE</span>
+              <span>Bibliothèque Globale des Ressources</span>
+            </div>
+          </a>
+          <nav class="footer-nav" aria-label="Liens secondaires">
+            <a href="index.html">Accueil</a>
+            <a href="explorer-filiere.html">Explorer les Filières</a>
+            <a href="mission.html">Mission</a>
+            <a href="vision.html">Vision</a>
+            <a href="terms.html" class="active">Conditions d’utilisation</a>
+          </nav>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2025 FSTS DRIVE — Plateforme indépendante créée par Zakarya G.</span>
+          <span>Conçu avec passion pour la communauté FST Settat.</span>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const navToggle = document.getElementById("nav-toggle");
+      const navWrapper = document.getElementById("primary-nav");
+      const navToggleLabel = navToggle ? navToggle.querySelector(".sr-only") : null;
+      const navLinks = navWrapper ? navWrapper.querySelectorAll("a") : [];
+      const MOBILE_BREAKPOINT = 900;
+
+      function isMobileView() {
+        return window.innerWidth <= MOBILE_BREAKPOINT;
+      }
+
+      function openMobileNav() {
+        if (!navWrapper || !navToggle) return;
+        navWrapper.classList.add("open");
+        navToggle.classList.add("open");
+        navToggle.setAttribute("aria-expanded", "true");
+        if (navToggleLabel) {
+          navToggleLabel.textContent = "Fermer le menu";
+        }
+      }
+
+      function closeMobileNav(shouldFocusToggle = false) {
+        if (!navWrapper || !navToggle) return;
+        navWrapper.classList.remove("open");
+        navToggle.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+        if (navToggleLabel) {
+          navToggleLabel.textContent = "Ouvrir le menu";
+        }
+        if (shouldFocusToggle) {
+          navToggle.focus();
+        }
+      }
+
+      if (navToggle) {
+        navToggle.addEventListener("click", () => {
+          const expanded = navToggle.getAttribute("aria-expanded") === "true";
+          if (expanded) {
+            closeMobileNav();
+          } else {
+            openMobileNav();
+          }
+        });
+      }
+
+      navLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          if (isMobileView()) {
+            closeMobileNav();
+          }
+        });
+      });
+
+      window.addEventListener("resize", () => {
+        if (!isMobileView()) {
+          closeMobileNav();
+        }
+      });
+    </script>
+  </body>
+</html>
