@@ -48,6 +48,153 @@ p {
   text-align: justify;
 }
 
+.a2hs-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: rgba(9, 16, 32, 0.78);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+}
+
+.a2hs-overlay.active {
+  display: flex;
+}
+
+.a2hs-card {
+  position: relative;
+  width: min(420px, 92vw);
+  background: #ffffff;
+  border-radius: 22px;
+  padding: clamp(1.75rem, 5vw, 2.25rem);
+  box-shadow: 0 28px 60px rgba(9, 16, 32, 0.28);
+  display: grid;
+  gap: 1.1rem;
+  color: var(--primary);
+}
+
+.a2hs-close {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  border: none;
+  background: rgba(31, 42, 68, 0.08);
+  color: var(--primary);
+  width: 34px;
+  height: 34px;
+  border-radius: 999px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.a2hs-close:hover,
+.a2hs-close:focus {
+  background: rgba(31, 42, 68, 0.16);
+  outline: none;
+}
+
+.a2hs-icon {
+  width: 72px;
+  height: 72px;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.25);
+}
+
+.a2hs-title {
+  margin: 0;
+  font-size: clamp(1.3rem, 3.2vw, 1.6rem);
+  line-height: 1.2;
+}
+
+.a2hs-text {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.a2hs-instructions {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.a2hs-step {
+  background: rgba(31, 42, 68, 0.04);
+  border-radius: 14px;
+  padding: 0.85rem 1rem;
+}
+
+.a2hs-step strong {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.3rem;
+  color: var(--primary);
+}
+
+.a2hs-step p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--muted);
+  text-align: left;
+}
+
+.a2hs-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.a2hs-button {
+  flex: 1 1 auto;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  border: none;
+  background: #ffcc4d;
+  color: #101820;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+
+.a2hs-button:hover,
+.a2hs-button:focus {
+  transform: translateY(-1px);
+  box-shadow: 0 16px 32px rgba(255, 204, 77, 0.35);
+  outline: none;
+}
+
+.a2hs-link {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.35rem 0.6rem;
+}
+
+.a2hs-link:hover,
+.a2hs-link:focus {
+  color: var(--primary);
+  text-decoration: underline;
+  outline: none;
+}
+
+body.a2hs-lock {
+  overflow: hidden;
+}
+
+.a2hs-overlay[aria-hidden='true'] .a2hs-card {
+  pointer-events: none;
+}
+
+.a2hs-overlay[aria-hidden='true'] {
+  display: none;
+}
+
 header {
   background: #ffffff;
   color: var(--primary);
@@ -1523,6 +1670,55 @@ footer {
       </section>
     </main>
 
+    <div
+      id="a2hs-prompt"
+      class="a2hs-overlay"
+      role="dialog"
+      aria-modal="true"
+      aria-hidden="true"
+      aria-labelledby="a2hs-title"
+    >
+      <div class="a2hs-card" role="document">
+        <button type="button" class="a2hs-close" id="a2hs-close" aria-label="Fermer la fenêtre">
+          ×
+        </button>
+        <img
+          src="https://i.ibb.co/k6PxTVws/logo-fsts-drive.png"
+          alt=""
+          class="a2hs-icon"
+          aria-hidden="true"
+        />
+        <h3 class="a2hs-title" id="a2hs-title">
+          Ajouter FSTS DRIVE à votre écran d’accueil
+        </h3>
+        <p class="a2hs-text">
+          Gardez un accès direct à la bibliothèque pédagogique depuis votre téléphone en installant le raccourci sur votre écran d’accueil.
+        </p>
+        <div class="a2hs-instructions">
+          <div class="a2hs-step">
+            <strong>Android</strong>
+            <p>
+              Touchez l’icône ⋮ dans votre navigateur puis choisissez « Ajouter à l’écran d’accueil ».
+            </p>
+          </div>
+          <div class="a2hs-step">
+            <strong>iPhone / iPad</strong>
+            <p>
+              Touchez l’icône de partage puis sélectionnez « Sur l’écran d’accueil ».
+            </p>
+          </div>
+        </div>
+        <div class="a2hs-actions">
+          <button type="button" class="a2hs-button" id="a2hs-accept">
+            Ajouter maintenant
+          </button>
+          <button type="button" class="a2hs-link" id="a2hs-dismiss">
+            Plus tard
+          </button>
+        </div>
+      </div>
+    </div>
+
     <footer>
       <div class="footer-shell">
         <div class="footer-head">
@@ -1578,6 +1774,124 @@ const heroCta = document.getElementById('hero-cta');
 const catalogCards = Array.from(
   document.querySelectorAll('.catalog-card[data-group]')
 );
+const a2hsOverlay = document.getElementById('a2hs-prompt');
+const a2hsAccept = document.getElementById('a2hs-accept');
+const a2hsDismiss = document.getElementById('a2hs-dismiss');
+const a2hsClose = document.getElementById('a2hs-close');
+
+const A2HS_STORAGE_KEY = 'fstsd_a2hs_prompt_seen_v1';
+let deferredA2HSPrompt = null;
+let a2hsTimerId = null;
+
+function markA2HSAsSeen() {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage?.setItem(A2HS_STORAGE_KEY, '1');
+  } catch (error) {
+    // ignore storage errors (private mode, etc.)
+  }
+}
+
+function shouldShowA2HS() {
+  if (typeof window === 'undefined' || !a2hsOverlay) return false;
+  const hasSeen = (() => {
+    try {
+      return window.localStorage?.getItem(A2HS_STORAGE_KEY) === '1';
+    } catch (error) {
+      return false;
+    }
+  })();
+  if (hasSeen) return false;
+
+  const isStandalone = window.matchMedia?.('(display-mode: standalone)').matches;
+  const isIOSStandalone = typeof window.navigator !== 'undefined' && window.navigator.standalone;
+  if (isStandalone || isIOSStandalone) {
+    return false;
+  }
+
+  const ua = window.navigator?.userAgent || '';
+  const isMobile = /android|iphone|ipad|ipod/i.test(ua);
+  return isMobile;
+}
+
+function openA2HSPrompt() {
+  if (!a2hsOverlay) return;
+  if (a2hsTimerId) {
+    window.clearTimeout(a2hsTimerId);
+    a2hsTimerId = null;
+  }
+  a2hsOverlay.classList.add('active');
+  a2hsOverlay.setAttribute('aria-hidden', 'false');
+  document.body.classList.add('a2hs-lock');
+}
+
+function closeA2HSPrompt(persist = false) {
+  if (!a2hsOverlay) return;
+  if (a2hsTimerId) {
+    window.clearTimeout(a2hsTimerId);
+    a2hsTimerId = null;
+  }
+  a2hsOverlay.classList.remove('active');
+  a2hsOverlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('a2hs-lock');
+  if (persist) {
+    markA2HSAsSeen();
+  }
+}
+
+function scheduleA2HSPrompt(delay = 3200) {
+  if (!shouldShowA2HS()) return;
+  if (a2hsTimerId) {
+    window.clearTimeout(a2hsTimerId);
+  }
+  a2hsTimerId = window.setTimeout(() => {
+    openA2HSPrompt();
+  }, delay);
+}
+
+function handleA2HSAccept() {
+  if (deferredA2HSPrompt) {
+    deferredA2HSPrompt.prompt();
+    deferredA2HSPrompt.userChoice
+      .catch(() => undefined)
+      .finally(() => {
+        deferredA2HSPrompt = null;
+        closeA2HSPrompt(true);
+      });
+  } else {
+    closeA2HSPrompt(true);
+  }
+}
+
+if (a2hsOverlay) {
+  a2hsOverlay.addEventListener('click', (event) => {
+    if (event.target === a2hsOverlay) {
+      closeA2HSPrompt(true);
+    }
+  });
+}
+
+if (a2hsClose) {
+  a2hsClose.addEventListener('click', () => closeA2HSPrompt(true));
+}
+
+if (a2hsDismiss) {
+  a2hsDismiss.addEventListener('click', () => closeA2HSPrompt(true));
+}
+
+if (a2hsAccept) {
+  a2hsAccept.addEventListener('click', handleA2HSAccept);
+}
+
+window.addEventListener('beforeinstallprompt', (event) => {
+  deferredA2HSPrompt = event;
+  event.preventDefault();
+  scheduleA2HSPrompt(900);
+});
+
+window.addEventListener('appinstalled', () => {
+  closeA2HSPrompt(true);
+});
 
 if (catalogHomeLink) {
   catalogHomeLink.addEventListener('click', (event) => {
@@ -1946,6 +2260,8 @@ if (heroCta) {
     window.location.href = 'explorer-filiere.html';
   });
 }
+
+scheduleA2HSPrompt();
 
 const queryApplied = applyQueryParams();
 render();
