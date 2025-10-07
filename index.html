@@ -766,7 +766,8 @@ h4 {
 }
 
 #group-panel {
-  margin-top: clamp(1rem, 4vw, 2.25rem);
+  margin: clamp(1rem, 4vw, 2.25rem) auto clamp(4rem, 8vw, 6rem);
+  width: min(1100px, 92vw);
 }
 
 .speciality-header {
@@ -901,6 +902,11 @@ h4 {
   font-weight: 600;
   cursor: pointer;
   padding: 0;
+}
+
+.breadcrumb button:disabled {
+  color: var(--muted);
+  cursor: default;
 }
 
 #breadcrumb-group {
@@ -1494,9 +1500,11 @@ footer {
         class="info-section flow-panel hidden"
         aria-live="polite"
       >
-        <div class="breadcrumb" id="breadcrumb">
+        <div class="breadcrumb hidden" id="breadcrumb">
           <button type="button" id="breadcrumb-home">Accueil</button>
-          <span aria-hidden="true" id="breadcrumb-sep">›</span>
+          <span aria-hidden="true" class="breadcrumb-sep" id="breadcrumb-sep-explorer">›</span>
+          <button type="button" id="breadcrumb-explorer" disabled>Explorer les Filières</button>
+          <span aria-hidden="true" class="breadcrumb-sep" id="breadcrumb-sep-group">›</span>
           <span id="breadcrumb-group"></span>
         </div>
 
@@ -1549,6 +1557,8 @@ const navToggle = document.getElementById('nav-toggle');
 const navToggleLabel = navToggle ? navToggle.querySelector('.sr-only') : null;
 const brandLink = document.getElementById('brand-link');
 const homeSection = document.getElementById('home');
+const catalogSection = document.getElementById('catalog');
+const catalogHomeLink = document.getElementById('catalog-home');
 const groupPanel = document.getElementById('group-panel');
 const specialityHeader = document.getElementById('speciality-header');
 const specialityTitle = document.getElementById('speciality-title');
@@ -1556,12 +1566,22 @@ const specialitySubtitle = document.getElementById('speciality-subtitle');
 const specialityList = document.getElementById('speciality-view');
 const breadcrumb = document.getElementById('breadcrumb');
 const breadcrumbHome = document.getElementById('breadcrumb-home');
-const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
+const breadcrumbExplorer = document.getElementById('breadcrumb-explorer');
+const breadcrumbExplorerSep = document.getElementById('breadcrumb-sep-explorer');
+const breadcrumbGroupSep = document.getElementById('breadcrumb-sep-group');
 const breadcrumbGroup = document.getElementById('breadcrumb-group');
 const heroCta = document.getElementById('hero-cta');
 const catalogCards = Array.from(
   document.querySelectorAll('.catalog-card[data-group]')
 );
+
+if (catalogHomeLink) {
+  catalogHomeLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    resetToHome();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+}
 
 const groupInfo = {
   'tronc-commun': {
@@ -1674,6 +1694,13 @@ function resetToHome() {
   render();
 }
 
+function showCatalogView() {
+  state.view = 'catalog';
+  state.group = null;
+  render();
+  scrollToSection(catalogSection ?? groupPanel);
+}
+
 function renderSpecialities(groupKey) {
   const config = groupInfo[groupKey];
   if (!config || !specialityList) return;
@@ -1706,6 +1733,9 @@ function renderSpecialities(groupKey) {
     const panel = card.querySelector('.speciality-panel');
 
     if (toggle && panel) {
+      toggle.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      card.classList.remove('open');
       toggle.addEventListener('click', () => {
         const expanded = toggle.getAttribute('aria-expanded') === 'true';
         toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
@@ -1722,53 +1752,80 @@ function render() {
   const { view, group } = state;
   setActiveNav(view === 'home' ? 'home' : null);
 
-  if (view === 'home') {
-    homeSection?.classList.remove('hidden');
-    groupPanel?.classList.add('hidden');
-    breadcrumb?.classList.add('hidden');
+  const hideSpecialities = () => {
     specialityHeader?.classList.add('hidden');
     if (specialityList) {
       specialityList.classList.add('hidden');
       specialityList.innerHTML = '';
     }
+  };
+
+  if (view === 'home') {
+    homeSection?.classList.remove('hidden');
+    catalogSection?.classList.add('hidden');
+    groupPanel?.classList.add('hidden');
+    breadcrumb?.classList.add('hidden');
+    if (breadcrumbExplorer) {
+      breadcrumbExplorer.disabled = true;
+    }
+    breadcrumbExplorerSep?.classList.add('hidden');
+    breadcrumbGroupSep?.classList.add('hidden');
+    if (breadcrumbGroup) {
+      breadcrumbGroup.textContent = '';
+    }
+    hideSpecialities();
     return;
   }
 
   homeSection?.classList.add('hidden');
+
+  if (view === 'catalog') {
+    catalogSection?.classList.remove('hidden');
+    groupPanel?.classList.add('hidden');
+    breadcrumb?.classList.add('hidden');
+    if (breadcrumbExplorer) {
+      breadcrumbExplorer.disabled = true;
+    }
+    breadcrumbExplorerSep?.classList.add('hidden');
+    breadcrumbGroupSep?.classList.add('hidden');
+    if (breadcrumbGroup) {
+      breadcrumbGroup.textContent = '';
+    }
+    hideSpecialities();
+    return;
+  }
+
+  catalogSection?.classList.add('hidden');
   groupPanel?.classList.remove('hidden');
 
   const config = group ? groupInfo[group] : null;
-  const hasGroup = Boolean(config);
+  if (!config) {
+    state.view = 'catalog';
+    state.group = null;
+    render();
+    return;
+  }
 
-  if (breadcrumb) {
-    breadcrumb.classList.toggle('hidden', !hasGroup);
+  breadcrumb?.classList.remove('hidden');
+  if (breadcrumbExplorer) {
+    breadcrumbExplorer.disabled = false;
   }
-  if (breadcrumbSeparator) {
-    breadcrumbSeparator.classList.toggle('hidden', !hasGroup);
-  }
+  breadcrumbExplorerSep?.classList.remove('hidden');
+  breadcrumbGroupSep?.classList.remove('hidden');
   if (breadcrumbGroup) {
-    breadcrumbGroup.textContent = hasGroup && config ? config.label : '';
+    breadcrumbGroup.textContent = config.label;
   }
 
   if (specialityHeader) {
-    if (hasGroup && config) {
-      specialityTitle.textContent = `${config.label} — Spécialités`;
-      specialitySubtitle.textContent =
-        'Sélectionnez une spécialité pour afficher les années disponibles.';
-      specialityHeader.classList.remove('hidden');
-    } else {
-      specialityHeader.classList.add('hidden');
-    }
+    specialityTitle.textContent = `${config.label} — Spécialités`;
+    specialitySubtitle.textContent =
+      'Sélectionnez une spécialité pour afficher les années disponibles.';
+    specialityHeader.classList.remove('hidden');
   }
 
   if (specialityList) {
-    if (hasGroup && config) {
-      specialityList.classList.remove('hidden');
-      renderSpecialities(group);
-    } else {
-      specialityList.classList.add('hidden');
-      specialityList.innerHTML = '';
-    }
+    specialityList.classList.remove('hidden');
+    renderSpecialities(group);
   }
 }
 
@@ -1807,6 +1864,12 @@ catalogCards.forEach((card) => {
     }
   });
 });
+
+if (breadcrumbExplorer) {
+  breadcrumbExplorer.addEventListener('click', () => {
+    showCatalogView();
+  });
+}
 
 navButtons.forEach((button) => {
   button.addEventListener('click', () => {
