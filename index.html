@@ -769,40 +769,115 @@ h4 {
   margin-top: clamp(1rem, 4vw, 2.25rem);
 }
 
-.filiere-grid {
+.speciality-header {
+  margin-bottom: 1.5rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.speciality-header h3 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 1.8rem);
+}
+
+.speciality-header p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+.speciality-list {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
 }
 
-.tile {
+.speciality-card {
   background: var(--card-bg);
-  border-radius: 0.9rem;
-  padding: 1.25rem;
-  box-shadow: 0 16px 36px rgba(39, 64, 96, 0.06);
+  border-radius: 1rem;
   border: 1px solid rgba(39, 64, 96, 0.08);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-  cursor: pointer;
-  text-align: left;
+  box-shadow: 0 18px 38px rgba(39, 64, 96, 0.08);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.tile:hover,
-.tile:focus {
-  transform: translateY(-4px);
-  box-shadow: 0 22px 44px rgba(39, 64, 96, 0.12);
+.speciality-card.open {
+  box-shadow: 0 24px 52px rgba(39, 64, 96, 0.16);
+  border-color: rgba(31, 42, 68, 0.18);
+}
+
+.speciality-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.15rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--primary);
+  cursor: pointer;
+}
+
+.speciality-toggle:hover,
+.speciality-toggle:focus {
+  background: rgba(240, 165, 0, 0.1);
   outline: none;
 }
 
-.tile h3 {
-  margin-bottom: 0.35rem;
+.speciality-name {
+  text-align: left;
 }
 
-.tile p {
+.chevron {
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+
+.speciality-card.open .chevron {
+  transform: rotate(-135deg);
+}
+
+.speciality-panel {
+  border-top: 1px solid rgba(39, 64, 96, 0.12);
+  padding: 1rem 1.5rem 1.4rem;
+  display: grid;
+  gap: 0.75rem;
+  background: linear-gradient(180deg, rgba(248, 249, 251, 0.9), #ffffff);
+}
+
+.speciality-panel-text {
   margin: 0;
+  font-size: 0.92rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   color: var(--muted);
-  font-size: 0.9rem;
-  text-align: justify;
+}
+
+.year-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.year-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: rgba(240, 165, 0, 0.15);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border: 1px solid rgba(240, 165, 0, 0.4);
+  cursor: default;
 }
 
 .hidden {
@@ -828,56 +903,9 @@ h4 {
   padding: 0;
 }
 
-.modules-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.25rem;
-}
-
-.modules-set {
-  display: contents;
-}
-
-.module-card {
-  background: var(--card-bg);
-  border-radius: 1rem;
-  padding: 1.5rem;
-  box-shadow: 0 18px 38px rgba(39, 64, 96, 0.08);
-  border: 1px solid rgba(39, 64, 96, 0.08);
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-
-.module-card h4 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
-.link-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.link-list a {
-  color: var(--primary);
-  text-decoration: none;
+#breadcrumb-group {
   font-weight: 600;
-  padding: 0.5rem 0.75rem;
-  background: rgba(244, 162, 97, 0.16);
-  border-radius: 0.75rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  transition: background 0.2s ease, color 0.2s ease;
-}
-
-.link-list a:hover,
-.link-list a:focus {
-  background: rgba(244, 162, 97, 0.32);
-  color: #1a1a1a;
-  outline: none;
+  color: var(--primary);
 }
 
 footer {
@@ -999,17 +1027,13 @@ footer {
 
   .home-catalog-grid,
   .catalog-grid,
-  .group-grid,
-  .filiere-grid,
-  .modules-grid {
+  .speciality-list {
     justify-items: center;
   }
 
   .home-catalog-grid > *,
   .catalog-grid > *,
-  .group-grid > *,
-  .filiere-grid > *,
-  .modules-grid > * {
+  .speciality-list > * {
     width: min(100%, 360px);
     justify-self: center;
   }
@@ -1129,11 +1153,7 @@ footer {
     box-shadow: none;
   }
 
-  .modules-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .filiere-grid {
+  .speciality-list {
     grid-template-columns: 1fr;
   }
 
@@ -1322,7 +1342,7 @@ footer {
           <div class="home-catalog-inner">
             <div class="home-catalog-header">
               <h2 id="home-catalog-title">Explorer les Filières</h2>
-              <p>Choisissez une filière pour consulter les modules.</p>
+              <p>Choisissez une filière pour découvrir les spécialités et années disponibles.</p>
             </div>
             <div class="home-catalog-grid" role="list">
               <a
@@ -1423,7 +1443,7 @@ footer {
                 Explorer les Filières
               </h2>
               <p class="catalog-text">
-                Choisissez une filière pour consulter les modules.
+                Choisissez une filière pour découvrir les spécialités et années disponibles.
               </p>
             </div>
             <div class="catalog-grid" role="list">
@@ -1477,457 +1497,17 @@ footer {
         <div class="breadcrumb" id="breadcrumb">
           <button type="button" id="breadcrumb-home">Accueil</button>
           <span aria-hidden="true" id="breadcrumb-sep">›</span>
-          <button type="button" id="breadcrumb-group"></button>
-          <span id="breadcrumb-filiere" class="hidden"></span>
+          <span id="breadcrumb-group"></span>
         </div>
 
-        <div id="filiere-view" class="filiere-grid hidden" role="list">
-          <button
-            type="button"
-            class="tile"
-            data-group="tronc-commun"
-            data-filiere="maths-fondamentales"
-          >
-            <h3>Mathématiques Fondamentales</h3>
-            <p>Analyse, algèbre et outils de base.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="tronc-commun"
-            data-filiere="informatique-intro"
-          >
-            <h3>Informatique Intro</h3>
-            <p>Programmation et structures de données.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="licence"
-            data-filiere="gi"
-          >
-            <h3>Génie Informatique (GI)</h3>
-            <p>Développement logiciel et systèmes.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="licence"
-            data-filiere="gc"
-          >
-            <h3>Génie Civil (GC)</h3>
-            <p>Structures, matériaux et topographie.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="master"
-            data-filiere="msd"
-          >
-            <h3>Management des Systèmes Décisionnels (MSD)</h3>
-            <p>Business intelligence et gouvernance.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="master"
-            data-filiere="sitd"
-          >
-            <h3>
-              Sécurité &amp; Ingénierie des Technologies de Données (SITD)
-            </h3>
-            <p>Sécurité, Big Data et infrastructures.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="ingenieur"
-            data-filiere="imi"
-          >
-            <h3>Ingénierie Mécatronique et Industrielle (IMI)</h3>
-            <p>Automatisation et robotique.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="ingenieur"
-            data-filiere="irssi"
-          >
-            <h3>Ingénierie des Réseaux et Systèmes Sécurisés (IRSSI)</h3>
-            <p>Systèmes, réseaux et cybersécurité.</p>
-          </button>
-          <button
-            type="button"
-            class="tile"
-            data-group="ingenieur"
-            data-filiere="qhse"
-          >
-            <h3>Qualité, Hygiène, Sécurité, Environnement (QHSE)</h3>
-            <p>Gestion des risques et conformité.</p>
-          </button>
+        <div id="speciality-header" class="speciality-header hidden">
+          <h3 id="speciality-title"></h3>
+          <p id="speciality-subtitle">
+            Sélectionnez une spécialité pour afficher les années disponibles.
+          </p>
         </div>
 
-        <div id="modules-view" class="modules-grid hidden" role="list">
-          <section
-            class="modules-set hidden"
-            data-group="tronc-commun"
-            data-filiere="maths-fondamentales"
-          >
-            <article class="module-card">
-              <h4>Analyse I</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/1aExampleMathAnalyse1/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Analyse I</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/1bExampleMathAnalyse1TD/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📝 TD – Analyse I</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Algorithmique I</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/1cExampleAlgoCours/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Algorithmique I</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/1dExampleAlgoTP/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >💻 TP – Algorithmique I</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Physique Générale</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/1eExamplePhysique/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📽️ Vidéo – Cinématique</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="tronc-commun"
-            data-filiere="informatique-intro"
-          >
-            <article class="module-card">
-              <h4>Programmation C</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/1fExampleProgC/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Programmation C</a
-                >
-                <a
-                  href="https://drive.google.com/drive/folders/1gExampleProgCFolder"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Exercices et corrections</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Architecture des Ordinateurs</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/1hExampleArchCours/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – Architecture</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="licence"
-            data-filiere="gi"
-          >
-            <article class="module-card">
-              <h4>Structures de Données Avancées</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/2aExampleSDA/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Structures de Données</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/2bExampleSDA/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📝 TD – Listes et arbres</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Développement Web</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/2cExampleWebSlides/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – HTML &amp; CSS</a
-                >
-                <a
-                  href="https://drive.google.com/drive/folders/2dExampleWebFolder"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Projets</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Bases de Données</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/2eExampleBDD/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – SQL</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/2fExampleBDDTP/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >🧪 TP – Modélisation</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="licence"
-            data-filiere="gc"
-          >
-            <article class="module-card">
-              <h4>Mécanique des Structures</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/2gExampleMeca/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Mécanique</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Résistance des Matériaux</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/2hExampleRDM/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – RDM</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Topographie</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/drive/folders/2iExampleTopoFolder"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Travaux pratiques</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="master"
-            data-filiere="msd"
-          >
-            <article class="module-card">
-              <h4>Data Warehouse</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/3aExampleDW/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Modélisation multidimensionnelle</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/3bExampleDWTP/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >🧪 TP – ETL avec Talend</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Data Mining</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/3cExampleDM/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – Classification</a
-                >
-                <a
-                  href="https://drive.google.com/drive/folders/3dExampleDMFolder"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Jeux de données</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="master"
-            data-filiere="sitd"
-          >
-            <article class="module-card">
-              <h4>Sécurité Réseau</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/3eExampleSecReseau/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Sécurité réseau</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/3fExampleSecLab/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >🧪 TP – Pare-feux</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Big Data Processing</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/drive/folders/3gExampleBigData"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – TP Spark</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="ingenieur"
-            data-filiere="imi"
-          >
-            <article class="module-card">
-              <h4>Automatique Avancée</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/4aExampleAuto/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Automatique</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/4bExampleAuto/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – Commande PID</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Robotique</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/drive/folders/4cExampleRobot"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Projets</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="ingenieur"
-            data-filiere="irssi"
-          >
-            <article class="module-card">
-              <h4>Administration Système Avancée</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/4dExampleSysAdmin/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Linux avancé</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Audit de Sécurité</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/drive/folders/4eExampleAudit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📁 Dossier – Guides d’audit</a
-                >
-                <a
-                  href="https://drive.google.com/file/d/4fExampleAuditSlides/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📊 Slides – Outils et méthodologie</a
-                >
-              </div>
-            </article>
-          </section>
-
-          <section
-            class="modules-set hidden"
-            data-group="ingenieur"
-            data-filiere="qhse"
-          >
-            <article class="module-card">
-              <h4>Management QSE</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/4gExampleQSE/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >📄 Cours PDF – Normes ISO</a
-                >
-              </div>
-            </article>
-            <article class="module-card">
-              <h4>Gestion de Crise</h4>
-              <div class="link-list">
-                <a
-                  href="https://drive.google.com/file/d/4hExampleCrisis/view"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  >🎥 Vidéo – Gestion d’incident</a
-                >
-              </div>
-            </article>
-          </section>
-        </div>
+        <div id="speciality-view" class="speciality-list hidden" role="list"></div>
       </section>
     </main>
 
@@ -1962,64 +1542,108 @@ footer {
     </footer>
 
     <script>
-const navButtons = Array.from(document.querySelectorAll(".nav-btn"));
-const navLinks = Array.from(document.querySelectorAll(".nav-link"));
-const navWrapper = document.getElementById("primary-nav");
-const navToggle = document.getElementById("nav-toggle");
-const navToggleLabel = navToggle
-  ? navToggle.querySelector(".sr-only")
-  : null;
-const brandLink = document.getElementById("brand-link");
-const homeSection = document.getElementById("home");
-const catalogSection = document.getElementById("catalog");
-const catalogHomeLink = document.getElementById("catalog-home");
-const catalogCards = Array.from(document.querySelectorAll(".catalog-card"));
-const groupPanel = document.getElementById("group-panel");
-const filiereView = document.getElementById("filiere-view");
-const filiereTiles = Array.from(filiereView.querySelectorAll(".tile"));
-const modulesView = document.getElementById("modules-view");
-const moduleSets = Array.from(
-  modulesView.querySelectorAll(".modules-set")
+const navButtons = Array.from(document.querySelectorAll('.nav-btn'));
+const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+const navWrapper = document.getElementById('primary-nav');
+const navToggle = document.getElementById('nav-toggle');
+const navToggleLabel = navToggle ? navToggle.querySelector('.sr-only') : null;
+const brandLink = document.getElementById('brand-link');
+const homeSection = document.getElementById('home');
+const groupPanel = document.getElementById('group-panel');
+const specialityHeader = document.getElementById('speciality-header');
+const specialityTitle = document.getElementById('speciality-title');
+const specialitySubtitle = document.getElementById('speciality-subtitle');
+const specialityList = document.getElementById('speciality-view');
+const breadcrumb = document.getElementById('breadcrumb');
+const breadcrumbHome = document.getElementById('breadcrumb-home');
+const breadcrumbSeparator = document.getElementById('breadcrumb-sep');
+const breadcrumbGroup = document.getElementById('breadcrumb-group');
+const heroCta = document.getElementById('hero-cta');
+const catalogCards = Array.from(
+  document.querySelectorAll('.catalog-card[data-group]')
 );
-const breadcrumb = document.getElementById("breadcrumb");
-const breadcrumbHome = document.getElementById("breadcrumb-home");
-const breadcrumbSeparator = document.getElementById("breadcrumb-sep");
-const breadcrumbGroupBtn = document.getElementById("breadcrumb-group");
-const breadcrumbFiliere = document.getElementById("breadcrumb-filiere");
-const heroCta = document.getElementById("hero-cta");
 
-const navLabels = {
-  home: "Accueil",
-  "tronc-commun": "Tronc commun",
-  licence: "Licence",
-  master: "Master",
-  ingenieur: "Cycle d’ingénieur",
+const groupInfo = {
+  'tronc-commun': {
+    label: 'Tronc commun',
+    years: ['1ère année', '2ème année'],
+    specialities: [
+      { name: 'Génie électrique et Systèmes embarqués' },
+      { name: 'Génie mécanique et systèmes industriels' },
+      { name: 'Génie biologique' },
+      { name: 'Génie chimique' },
+      { name: 'Génie Informatique (GI)' },
+      { name: 'Mathématiques et Sciences de données' },
+    ],
+  },
+  licence: {
+    label: 'Licence Sciences et Techniques',
+    years: ['1ère année'],
+    specialities: [
+      { name: 'LST SB (Sciences Biomédicales)' },
+      { name: 'LST GC (Génie Civil)' },
+      { name: 'LST CAE (Chimie Appliquée et Environnement)' },
+      { name: 'LST MECAT (Mécatronique)' },
+      { name: 'LST SITD (Système d’information et Transformation digitale)' },
+      { name: 'LST GESA (Génie Electrique et Systèmes Automatisés)' },
+      { name: 'LST EEA (Électronique Electrotechnique et Automatique)' },
+      { name: 'LST GI (Génie Informatique)' },
+      { name: 'LST BGM (Biochimie-Génétique-Microbiologie)' },
+      { name: 'LST TACQ (Techniques d’Analyses et Contrôle Qualité)' },
+      { name: 'LST GM (Génie Mécanique)' },
+    ],
+  },
+  master: {
+    label: 'Master Sciences et Techniques',
+    years: ['1ère année', '2ème année'],
+    specialities: [
+      { name: 'Analyse et Gestion Qualité (AGQ)' },
+      { name: 'Bio Ingénierie (BI)' },
+      { name: 'Ingénierie Chimique et Sciences des Matériaux (ICSM)' },
+      { name: 'Ingénierie et Management Industriel (IMI)' },
+      { name: 'Automatique - Traitement du Signal et Informatique Industrielle (ATSII)' },
+      { name: "Valorisation et management de l'innovation en biosciences (VMIB)" },
+      { name: 'Ingénierie des Réseaux Informatiques et des Systèmes des Télécommunications Intelligents (IRISTI)' },
+      { name: 'Prospection et Valorisation des Ressources Minérales (PVRM)' },
+      { name: 'Réseaux et Systèmes Informatiques (RSI)' },
+      { name: 'Mécatronique (MECA)' },
+    ],
+  },
+  ingenieur: {
+    label: 'Cycle d’ingénieur',
+    years: ['1ère année', '2ème année', '3ème année'],
+    specialities: [
+      { name: 'Ingénierie de Conception et Productique (ICP)' },
+      { name: 'Ingénierie des Systèmes Electriques et Systèmes Embarqués (ISESE)' },
+      { name: 'Ingénierie Biomédicale : Instrumentation & Maintenance (IBIM)' },
+      { name: 'Génie Informatique (GI)' },
+      { name: 'Procédés et Ingénierie Chimique (PIC)' },
+    ],
+  },
 };
 
 const state = {
-  view: "home",
+  view: 'home',
   group: null,
-  filiere: null,
-  filiereLabel: "",
 };
 
 function openMobileNav() {
   if (!navWrapper || !navToggle) return;
-  navWrapper.classList.add("open");
-  navToggle.classList.add("open");
-  navToggle.setAttribute("aria-expanded", "true");
+  navWrapper.classList.add('open');
+  navToggle.classList.add('open');
+  navToggle.setAttribute('aria-expanded', 'true');
   if (navToggleLabel) {
-    navToggleLabel.textContent = "Fermer le menu";
+    navToggleLabel.textContent = 'Fermer le menu';
   }
 }
 
 function closeMobileNav(shouldFocusToggle = false) {
   if (!navWrapper || !navToggle) return;
-  navWrapper.classList.remove("open");
-  navToggle.classList.remove("open");
-  navToggle.setAttribute("aria-expanded", "false");
+  navWrapper.classList.remove('open');
+  navToggle.classList.remove('open');
+  navToggle.setAttribute('aria-expanded', 'false');
   if (navToggleLabel) {
-    navToggleLabel.textContent = "Ouvrir le menu";
+    navToggleLabel.textContent = 'Ouvrir le menu';
   }
   if (shouldFocusToggle) {
     navToggle.focus();
@@ -2033,189 +1657,163 @@ function isMobileView() {
 function setActiveNav(target) {
   navButtons.forEach((btn) => {
     const isActive = Boolean(target && btn.dataset.target === target);
-    btn.classList.toggle("active", isActive);
-    btn.setAttribute("aria-pressed", isActive ? "true" : "false");
+    btn.classList.toggle('active', isActive);
+    btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
   });
 }
 
 function scrollToSection(section) {
   if (section) {
-    section.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
-function render() {
-  const { view, group, filiere, filiereLabel } = state;
-  const activeNav =
-    view === "home"
-      ? "home"
-      : view === "filiere" || view === "modules"
-      ? group
-      : null;
-
-  setActiveNav(activeNav);
-
-  if (view === "home") {
-    homeSection.classList.remove("hidden");
-    if (catalogSection) {
-      catalogSection.classList.add("hidden");
-    }
-    groupPanel.classList.add("hidden");
-    breadcrumb.classList.add("hidden");
-    filiereView.classList.add("hidden");
-    modulesView.classList.add("hidden");
-    filiereTiles.forEach((tile) => tile.classList.remove("hidden"));
-    moduleSets.forEach((set) => set.classList.add("hidden"));
-    return;
-  }
-
-  homeSection.classList.add("hidden");
-
-  if (view === "catalog") {
-    if (catalogSection) {
-      catalogSection.classList.remove("hidden");
-    }
-    groupPanel.classList.add("hidden");
-    breadcrumb.classList.add("hidden");
-    filiereView.classList.add("hidden");
-    modulesView.classList.add("hidden");
-    return;
-  }
-
-  if (catalogSection) {
-    catalogSection.classList.add("hidden");
-  }
-  groupPanel.classList.remove("hidden");
-
-  const hasGroup = Boolean(group);
-  breadcrumb.classList.toggle("hidden", !hasGroup);
-  breadcrumbGroupBtn.classList.toggle("hidden", !hasGroup);
-  breadcrumbSeparator.classList.toggle("hidden", !hasGroup);
-
-  if (hasGroup) {
-    breadcrumbGroupBtn.textContent = navLabels[group] || "";
-  }
-
-  if (view === "filiere") {
-    filiereView.classList.remove("hidden");
-    modulesView.classList.add("hidden");
-    breadcrumbFiliere.classList.add("hidden");
-    breadcrumbFiliere.textContent = "";
-    filiereTiles.forEach((tile) => {
-      tile.classList.toggle("hidden", tile.dataset.group !== group);
-    });
-    moduleSets.forEach((set) => set.classList.add("hidden"));
-    return;
-  }
-
-  if (view === "modules") {
-    filiereView.classList.add("hidden");
-    modulesView.classList.remove("hidden");
-    breadcrumbFiliere.classList.remove("hidden");
-    breadcrumbFiliere.textContent = `› ${filiereLabel}`;
-    moduleSets.forEach((set) => {
-      const isMatch =
-        set.dataset.group === group && set.dataset.filiere === filiere;
-      set.classList.toggle("hidden", !isMatch);
-    });
+    section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 }
 
 function resetToHome() {
-  state.view = "home";
+  state.view = 'home';
   state.group = null;
-  state.filiere = null;
-  state.filiereLabel = "";
   render();
 }
 
-function applyQueryParams() {
-  const params = new URLSearchParams(window.location.search);
-  const groupParam = params.get("group");
-  const filiereParam = params.get("filiere");
-  let applied = false;
+function renderSpecialities(groupKey) {
+  const config = groupInfo[groupKey];
+  if (!config || !specialityList) return;
 
-  if (groupParam && Object.prototype.hasOwnProperty.call(navLabels, groupParam)) {
-    state.group = groupParam;
-    state.filiere = null;
-    state.filiereLabel = "";
-    state.view = "filiere";
-    applied = true;
+  specialityList.innerHTML = '';
 
-    if (filiereParam) {
-      const matchingTile = filiereTiles.find(
-        (tile) =>
-          tile.dataset.group === groupParam && tile.dataset.filiere === filiereParam
-      );
+  config.specialities.forEach((spec, index) => {
+    const panelId = `${groupKey}-panel-${index}`;
+    const toggleId = `${groupKey}-toggle-${index}`;
+    const yearsSource = Array.isArray(spec.years) && spec.years.length
+      ? spec.years
+      : config.years || [];
 
-      if (matchingTile) {
-        const titleEl = matchingTile.querySelector("h3");
-        state.view = "modules";
-        state.filiere = filiereParam;
-        state.filiereLabel = titleEl ? titleEl.textContent.trim() : "";
-      }
+    const card = document.createElement('article');
+    card.className = 'speciality-card';
+    card.innerHTML = `
+      <button type="button" class="speciality-toggle" id="${toggleId}" aria-expanded="false" aria-controls="${panelId}">
+        <span class="speciality-name">${spec.name}</span>
+        <span class="chevron" aria-hidden="true"></span>
+      </button>
+      <div class="speciality-panel" id="${panelId}" role="region" aria-labelledby="${toggleId}" hidden>
+        <p class="speciality-panel-text">Années disponibles</p>
+        <div class="year-list">
+          ${yearsSource.map((year) => `<span class="year-chip">${year}</span>`).join('')}
+        </div>
+      </div>
+    `;
+
+    const toggle = card.querySelector('.speciality-toggle');
+    const panel = card.querySelector('.speciality-panel');
+
+    if (toggle && panel) {
+      toggle.addEventListener('click', () => {
+        const expanded = toggle.getAttribute('aria-expanded') === 'true';
+        toggle.setAttribute('aria-expanded', expanded ? 'false' : 'true');
+        panel.hidden = expanded;
+        card.classList.toggle('open', !expanded);
+      });
     }
 
-    if (typeof history !== "undefined" && history.replaceState) {
-      history.replaceState(null, "", window.location.pathname);
-    }
-  }
-
-  return applied;
-}
-
-if (heroCta) {
-  heroCta.addEventListener("click", () => {
-    window.location.href = "explorer-filiere.html";
+    specialityList.appendChild(card);
   });
 }
 
-if (brandLink) {
-  brandLink.addEventListener("click", () => {
-    resetToHome();
+function render() {
+  const { view, group } = state;
+  setActiveNav(view === 'home' ? 'home' : null);
+
+  if (view === 'home') {
+    homeSection?.classList.remove('hidden');
+    groupPanel?.classList.add('hidden');
+    breadcrumb?.classList.add('hidden');
+    specialityHeader?.classList.add('hidden');
+    if (specialityList) {
+      specialityList.classList.add('hidden');
+      specialityList.innerHTML = '';
+    }
+    return;
+  }
+
+  homeSection?.classList.add('hidden');
+  groupPanel?.classList.remove('hidden');
+
+  const config = group ? groupInfo[group] : null;
+  const hasGroup = Boolean(config);
+
+  if (breadcrumb) {
+    breadcrumb.classList.toggle('hidden', !hasGroup);
+  }
+  if (breadcrumbSeparator) {
+    breadcrumbSeparator.classList.toggle('hidden', !hasGroup);
+  }
+  if (breadcrumbGroup) {
+    breadcrumbGroup.textContent = hasGroup && config ? config.label : '';
+  }
+
+  if (specialityHeader) {
+    if (hasGroup && config) {
+      specialityTitle.textContent = `${config.label} — Spécialités`;
+      specialitySubtitle.textContent =
+        'Sélectionnez une spécialité pour afficher les années disponibles.';
+      specialityHeader.classList.remove('hidden');
+    } else {
+      specialityHeader.classList.add('hidden');
+    }
+  }
+
+  if (specialityList) {
+    if (hasGroup && config) {
+      specialityList.classList.remove('hidden');
+      renderSpecialities(group);
+    } else {
+      specialityList.classList.add('hidden');
+      specialityList.innerHTML = '';
+    }
+  }
+}
+
+function applyQueryParams() {
+  if (typeof window === 'undefined') return false;
+  const params = new URLSearchParams(window.location.search);
+  const groupParam = params.get('group');
+
+  if (groupParam && Object.prototype.hasOwnProperty.call(groupInfo, groupParam)) {
+    state.view = 'specialities';
+    state.group = groupParam;
+    if (typeof history !== 'undefined' && history.replaceState) {
+      history.replaceState(null, '', window.location.pathname);
+    }
+    return true;
+  }
+
+  return false;
+}
+
+catalogCards.forEach((card) => {
+  card.addEventListener('click', (event) => {
+    if (event && typeof event.preventDefault === 'function') {
+      event.preventDefault();
+    }
+    const groupKey = card.dataset.group;
+    if (!groupKey || !Object.prototype.hasOwnProperty.call(groupInfo, groupKey)) {
+      return;
+    }
+    state.view = 'specialities';
+    state.group = groupKey;
+    render();
+    scrollToSection(groupPanel);
     if (isMobileView()) {
       closeMobileNav();
     }
   });
-}
-
-if (catalogHomeLink) {
-  catalogHomeLink.addEventListener("click", (event) => {
-    event.preventDefault();
-    resetToHome();
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  });
-}
-
-catalogCards.forEach((card) => {
-  card.addEventListener("click", (event) => {
-    if (event && typeof event.preventDefault === "function" && card.tagName === "A") {
-      event.preventDefault();
-    }
-    const groupKey = card.dataset.group;
-    if (!groupKey) return;
-    state.view = "filiere";
-    state.group = groupKey;
-    state.filiere = null;
-    state.filiereLabel = "";
-    render();
-    scrollToSection(groupPanel);
-  });
 });
 
 navButtons.forEach((button) => {
-  button.addEventListener("click", () => {
+  button.addEventListener('click', () => {
     const target = button.dataset.target;
-    if (target === "home") {
+    if (target === 'home') {
       resetToHome();
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      state.view = "filiere";
-      state.group = target;
-      state.filiere = null;
-      state.filiereLabel = "";
-      render();
-      scrollToSection(groupPanel);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
     if (isMobileView()) {
       closeMobileNav();
@@ -2224,7 +1822,7 @@ navButtons.forEach((button) => {
 });
 
 navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
+  link.addEventListener('click', () => {
     if (isMobileView()) {
       closeMobileNav();
     }
@@ -2232,8 +1830,8 @@ navLinks.forEach((link) => {
 });
 
 if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    const expanded = navToggle.getAttribute("aria-expanded") === "true";
+  navToggle.addEventListener('click', () => {
+    const expanded = navToggle.getAttribute('aria-expanded') === 'true';
     if (expanded) {
       closeMobileNav();
     } else {
@@ -2242,63 +1840,50 @@ if (navToggle) {
   });
 }
 
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   if (!isMobileView()) {
     closeMobileNav();
   }
 });
 
-document.addEventListener("keydown", (event) => {
-  if (
-    event.key === "Escape" &&
-    navWrapper &&
-    navWrapper.classList.contains("open")
-  ) {
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape' && navWrapper?.classList.contains('open')) {
     closeMobileNav(true);
   }
 });
 
-filiereView.addEventListener("click", (event) => {
-  const tile = event.target.closest(".tile");
-  if (!tile) return;
-  const { group: groupKey, filiere: filiereKey } = tile.dataset;
-  if (!groupKey || !filiereKey) return;
-  const titleEl = tile.querySelector("h3");
-  const label = titleEl ? titleEl.textContent.trim() : "";
-  state.view = "modules";
-  state.group = groupKey;
-  state.filiere = filiereKey;
-  state.filiereLabel = label;
-  render();
-  scrollToSection(groupPanel);
-});
-
-breadcrumbHome.addEventListener("click", () => {
-  resetToHome();
-  window.scrollTo({ top: 0, behavior: "smooth" });
-  if (isMobileView()) {
-    closeMobileNav();
-  }
-});
-
-breadcrumbGroupBtn.addEventListener("click", () => {
-  if (!state.group) {
+if (brandLink) {
+  brandLink.addEventListener('click', (event) => {
+    event.preventDefault();
     resetToHome();
-    return;
-  }
-  state.view = "filiere";
-  state.filiere = null;
-  state.filiereLabel = "";
-  render();
-  scrollToSection(groupPanel);
-});
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isMobileView()) {
+      closeMobileNav();
+    }
+  });
+}
+
+if (breadcrumbHome) {
+  breadcrumbHome.addEventListener('click', () => {
+    resetToHome();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isMobileView()) {
+      closeMobileNav();
+    }
+  });
+}
+
+if (heroCta) {
+  heroCta.addEventListener('click', () => {
+    window.location.href = 'explorer-filiere.html';
+  });
+}
 
 const queryApplied = applyQueryParams();
 render();
-if (queryApplied && (state.view === "filiere" || state.view === "modules")) {
+if (queryApplied) {
   scrollToSection(groupPanel);
 }
-
 
     </script>
   </body>
